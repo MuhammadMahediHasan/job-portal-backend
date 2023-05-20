@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedInteger('job_categories_id');
             $table->unsignedInteger('companies_id');
+            $table->string('slug');
             $table->string('title');
             $table->string('description');
             $table->string('location');

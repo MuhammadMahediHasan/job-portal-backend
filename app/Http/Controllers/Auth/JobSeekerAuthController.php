@@ -5,13 +5,22 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Requests\Auth\JobSeekerLoginRequest;
 use App\Http\Requests\Auth\JobSeekerRegisterRequest;
 use App\Models\JobSeeker;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
+use Toastr;
 
 class JobSeekerAuthController
 {
+    public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    {
+        return view('frontend.auth.login');
+    }
+
     public function register(JobSeekerRegisterRequest $request): JsonResponse
     {
         try {
@@ -19,37 +28,26 @@ class JobSeekerAuthController
             $model->fill($request->fields());
             $model->save();
 
-            return successResponse($model->toArray());
+            Toastr::success('Success', "Registration Successful");
         } catch (\Exception $exception) {
-            return errorResponse([], $exception->getMessage());
+            Toastr::error('Error', 'Something went wrong!');
         }
     }
 
-    public function login(JobSeekerLoginRequest $request): JsonResponse
+    public function login(JobSeekerLoginRequest $request): \Illuminate\Contracts\Foundation\Application|Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
     {
         try {
-
-            $response = array();
-            $message = 'unauthenticated';
-            $code = Response::HTTP_UNAUTHORIZED;
-
             if (Auth::guard('job_seeker')->attempt($request->only('email', 'password'))) {
-
-                $message = 'success';
-                $code = Response::HTTP_OK;
-                $company = JobSeeker::query()->where('email', $request->get('email'))->first();
-                $response = array_merge(
-                    $company->only('name', 'email'), [
-                        'token' => $company->createToken('job_seeker')->accessToken
-                    ]
-                );
+                Toastr::success('Success', "Login Successful");
             } else {
-                $response[]['password'] = "Email & password doesn't matches";
+                Toastr::error('Error', "Email & password doesn't matches");
+                return back();
             }
 
-            return successResponse($response, $message, $code);
+            return redirect('job-seeker/login');
         } catch (\Exception $exception) {
-            return errorResponse([], $exception->getMessage());
+            Toastr::error('Error', 'Something went wrong!');
+            return back();
         }
     }
 }

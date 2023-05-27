@@ -24,9 +24,9 @@ class CompanyRegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name',
-            'email',
-            'password',
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required|confirmed',
         ];
     }
 

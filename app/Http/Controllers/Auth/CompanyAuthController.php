@@ -5,51 +5,59 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Requests\Auth\CompanyLoginRequest;
 use App\Http\Requests\Auth\CompanyRegisterRequest;
 use App\Models\Company;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
+use Toastr;
 
 class CompanyAuthController
 {
-    public function register(CompanyRegisterRequest $request): JsonResponse
+    public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    {
+        return view('frontend.auth.login');
+    }
+
+    public function register(CompanyRegisterRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         try {
             $model = new Company();
             $model->fill($request->fields());
             $model->save();
 
-            return successResponse($model->toArray());
+            Toastr::success('Success', "Login Successful");
+            return redirect('/');
         } catch (\Exception $exception) {
-            return errorResponse([], $exception->getMessage());
+            Toastr::error('Error', 'Something went wrong!');
+            return back();
         }
     }
 
-    public function login(CompanyLoginRequest $request): JsonResponse
+    public function login(CompanyLoginRequest $request): RedirectResponse
     {
         try {
-
-            $response = array();
-            $message = 'unauthenticated';
-            $code = Response::HTTP_UNAUTHORIZED;
-
             if (Auth::guard('company')->attempt($request->only('email', 'password'))) {
-
-                $company = Company::query()->where('email', $request->get('email'))->first();
-                $message = 'success';
-                $code = Response::HTTP_OK;
-                $response = array_merge(
-                    $company->only('name', 'email'), [
-                        'token' => $company->createToken('company')->accessToken
-                    ]
-                );
+                Toastr::success('Success', "Login Successful");
             } else {
-                $response[]['password'] = "Email & password doesn't matches";
+                Toastr::error('Error', "Email & password doesn't matches");
+                return back();
             }
 
-            return successResponse($response, $message, $code);
+            return redirect('company/login');
         } catch (\Exception $exception) {
-            return errorResponse([], $exception->getMessage());
+            Toastr::error('Error', 'Something went wrong!');
+            return back();
         }
+    }
+
+    public function logout(): RedirectResponse
+    {
+        Auth::guard('company')->logout();
+
+        return back();
     }
 }

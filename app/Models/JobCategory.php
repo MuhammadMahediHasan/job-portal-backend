@@ -11,6 +11,7 @@ class JobCategory extends Model
 
     protected $fillable = [
         'name',
+        'slug',
         'description',
     ];
 }

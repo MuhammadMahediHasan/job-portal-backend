@@ -25,7 +25,9 @@ class CompanyAuthController
     public function register(CompanyRegisterRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         try {
-            $model = new Company();
+            $model = Company::query()->firstOrNew([
+                'id' => $request->input('id')
+            ]);
             $model->fill($request->fields());
             $model->save();
 

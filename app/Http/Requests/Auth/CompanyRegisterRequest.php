@@ -26,14 +26,16 @@ class CompanyRegisterRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required',
-            'password' => 'required|confirmed',
+            'password' => request('id') ? 'sometimes' : 'required|confirmed',
         ];
     }
 
     public function fields(): array
     {
         $request = request()->all();
-        $request['password'] = Hash::make($request['password']);
+        if (!request('id')) {
+            $request['password'] = Hash::make($request['password']);
+        }
 
         return $request;
     }

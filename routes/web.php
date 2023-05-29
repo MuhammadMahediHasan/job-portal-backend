@@ -1,9 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\CompanyAuthController;
-use App\Http\Controllers\Auth\JobSeekerAuthController;
-use App\Http\Controllers\JobCategoryController;
-use App\Http\Controllers\JobController;
+use App\Http\Controllers\Company\JobController;
+use App\Http\Controllers\Company\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +21,6 @@ Route::get('/', function () {
 });
 
 
-
 Route::get('/job-seeker/register', function () {
     return view('frontend.auth.job-seeker-register');
 });
@@ -35,8 +33,9 @@ Route::prefix('company')->group(function () {
     Route::get('logout', [CompanyAuthController::class, 'logout']);
 
     Route::group(['middleware' => ['auth:company']], function () {
-        Route::post('/jobs', [JobController::class, 'store']);
-        Route::delete('/jobs/{job}', [JobController::class, 'destroy']);
+        Route::get('profile', [ProfileController::class, 'index']);
+        Route::get('profile/edit', [ProfileController::class, 'edit']);
+        Route::resource('profile/jobs', JobController::class);
 
         Route::get('/user', function () {
             return \Illuminate\Support\Facades\Auth::user();

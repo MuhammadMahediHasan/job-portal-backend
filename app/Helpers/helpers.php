@@ -54,3 +54,29 @@ if (!file_exists('jobSeekerAuthUser')) {
         return auth()->guard('job_seeker')->user();
     }
 }
+
+if (!file_exists('profileName')) {
+    function profileName(): string
+    {
+        if (companyAuthCheck()) {
+            return companyAuthUser()->name ?? '';
+        } elseif (jobSeekerAuthCheck()) {
+            return jobSeekerAuthUser()->name ?? '';
+        }
+
+        return '';
+    }
+}
+
+if (!file_exists('authUser')) {
+    function authUser(): string|Authenticatable
+    {
+        if (companyAuthCheck()) {
+            return companyAuthUser();
+        } elseif (jobSeekerAuthCheck()) {
+            return jobSeekerAuthUser();
+        }
+
+        return collect([]);
+    }
+}

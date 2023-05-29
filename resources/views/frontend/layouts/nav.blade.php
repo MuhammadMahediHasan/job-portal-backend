@@ -38,7 +38,7 @@
                     <a href="#"
                        class="nav-link dropdown-toggle"
                        data-bs-toggle="dropdown">
-                        {{ companyAuthCheck() ? companyAuthUser()->name : jobSeekerAuthUser()->name}}
+                        {{ profileName() }}
                         {{--                        <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg"--}}
                         {{--                             width="40" height="40" class="rounded-circle" alt="">--}}
                     </a>

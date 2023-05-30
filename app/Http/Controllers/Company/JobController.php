@@ -5,53 +5,61 @@ namespace App\Http\Controllers\Company;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\JobRequest;
 use App\Models\Job;
+use App\Models\JobCategory;
 use App\Models\JobSeeker;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Toastr;
 
 class JobController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): JsonResponse
+    public function index()
     {
         try {
             $jobs = Job::query()
+                ->with('jobCategory')
                 ->orderByDesc('id')
                 ->where('companies_id', Auth::id())
-                ->paginate();
+                ->get();
 
-            return successResponse($jobs);
+            return view('frontend.profile.company.job-list', compact('jobs'));
         } catch (\Exception $exception) {
-            return errorResponse([], $exception->getMessage());
+            Toastr::error('Error', 'Something went wrong!');
+            return back();
         }
     }
 
     public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('frontend.profile.company.job-post');
+        $jobCategories = JobCategory::query()->get();
+        return view('frontend.profile.company.job-post', compact('jobCategories'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(JobRequest $request): JsonResponse
+    public function store(JobRequest $request): RedirectResponse
     {
         try {
             DB::beginTransaction();
-            $model = new JobSeeker();
+            $model = new Job();
             $model->fill($request->fields());
             $model->save();
             DB::commit();
 
-            return successResponse($model->toArray());
+            Toastr::success('Success', "Job Successful");
+            return back();
         } catch (\Exception $exception) {
-            return errorResponse([], $exception->getMessage());
+            Toastr::error('Error', 'Something went wrong!');
+            return back();
         }
     }
 

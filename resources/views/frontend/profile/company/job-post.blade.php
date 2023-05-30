@@ -2,9 +2,9 @@
 @section('profile-content')
     <div class="card-box">
         <div class="wow fadeInUp" data-wow-delay="0.5s">
-            <form action="/company/register" method="POST">
-                @csrf
 
+            <form action="/company/profile/jobs" method="POST">
+                @csrf
                 <div class="row mt-2">
                     <div class="col-6">
                         <div class="form-floating">
@@ -12,9 +12,13 @@
                                     id="job_categories_id"
                                     name="job_categories_id"
                                     placeholder="Company Type">
-                                <option>Select</option>
+                                <option value="">Select</option>
+                                @foreach($jobCategories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
                             </select>
                             <label for="job_categories_id">Category</label>
+                            <small class="text-danger">{{ $errors->first('job_categories_id') }}</small>
                         </div>
                     </div>
                     <div class="col-6">
@@ -25,6 +29,7 @@
                                    id="title"
                                    placeholder="Title"/>
                             <label for="title">Title</label>
+                            <small class="text-danger">{{ $errors->first('title') }}</small>
                         </div>
                     </div>
                 </div>
@@ -38,6 +43,7 @@
                                    id="description"
                                    placeholder="Description"/>
                             <label for="description">Description</label>
+                            <small class="text-danger">{{ $errors->first('description') }}</small>
                         </div>
                     </div>
                 </div>
@@ -51,6 +57,7 @@
                                    id="location"
                                    placeholder="Location"/>
                             <label for="location">Location</label>
+                            <small class="text-danger">{{ $errors->first('location') }}</small>
                         </div>
                     </div>
                     <div class="col-6">
@@ -62,6 +69,7 @@
                                    id="salary_range"
                                    placeholder="Salary Range"/>
                             <label for="salary_range">Salary Range</label>
+                            <small class="text-danger">{{ $errors->first('salary_range') }}</small>
                         </div>
                     </div>
                 </div>
@@ -75,17 +83,19 @@
                                    id="job_nature"
                                    placeholder="Job Nature"/>
                             <label for="job_nature">Job Nature</label>
+                            <small class="text-danger">{{ $errors->first('job_nature') }}</small>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-floating">
                             <input name="vacancy"
                                    value="{{ old('vacancy', $job->vacancy ?? '') }}"
-                                   type="text"
+                                   type="number"
                                    class="form-control"
                                    id="vacancy"
                                    placeholder="Vacancy"/>
                             <label for="vacancy">Vacancy</label>
+                            <small class="text-danger">{{ $errors->first('vacancy') }}</small>
                         </div>
                     </div>
                 </div>
@@ -100,6 +110,7 @@
                                    id="dead_line"
                                    placeholder="Dead Line"/>
                             <label for="dead_line">Dead Line</label>
+                            <small class="text-danger">{{ $errors->first('dead_line') }}</small>
                         </div>
                     </div>
                 </div>

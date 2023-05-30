@@ -25,7 +25,7 @@ class Job extends Model
 
     public function jobCategory(): BelongsTo
     {
-        return $this->belongsTo(JobCategory::class);
+        return $this->belongsTo(JobCategory::class, 'job_categories_id');
     }
 
     public function applies(): HasMany

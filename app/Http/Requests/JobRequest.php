@@ -25,22 +25,22 @@ class JobRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'job_category_id' => 'required',
             'id' => 'sometimes',
+            'job_categories_id' => 'required',
             'title' => 'required',
             'description' => 'required',
             'location' => 'required',
             'salary_range' => 'required',
             'vacancy' => 'required',
             'job_nature' => 'required',
-            'dead_tine' => 'required',
+            'dead_line' => 'required',
         ];
     }
 
     public function fields(): array
     {
         return [
-            'job_category_id' => $this->get('job_category_id'),
+            'job_categories_id' => $this->get('job_categories_id'),
             'id' => $this->get('id'),
             'title' => $this->get('title'),
             'slug' => Str::slug($this->get('title')),
@@ -50,7 +50,7 @@ class JobRequest extends FormRequest
             'salary_range' => $this->get('salary_range'),
             'vacancy' => $this->get('vacancy'),
             'job_nature' => $this->get('job_nature'),
-            'dead_tine' => $this->get('dead_tine'),
+            'dead_line' => $this->get('dead_line'),
         ];
     }
 }

@@ -31,6 +31,10 @@
                                class="mb-1 btn btn-block btn-outline-secondary">
                                 Post a new job
                             </a>
+                            <a href="/company/profile/jobs"
+                               class="mb-1 btn btn-block btn-outline-secondary">
+                                Your Job List
+                            </a>
                         </div>
                     </div>
 

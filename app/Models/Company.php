@@ -12,6 +12,7 @@ class Company extends Authenticatable
     use HasFactory, HasApiTokens, Notifiable;
 
     protected $fillable = [
+        'type',
         'name',
         'email',
         'address',
@@ -27,5 +28,14 @@ class Company extends Authenticatable
         'contact_person_phone',
         'contact_person_designation',
         'password',
+    ];
+
+    const TYPES = [
+        1 => 'Government',
+        2 => 'Semi Government',
+        3 => 'NGO',
+        4 => 'Private Firm/Company',
+        6 => 'International Agencies',
+        7 => 'Others',
     ];
 }

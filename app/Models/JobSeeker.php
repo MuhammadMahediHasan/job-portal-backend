@@ -25,4 +25,13 @@ class JobSeeker extends Authenticatable
         'resume',
         'password',
     ];
+
+    protected $appends = [
+        'name'
+    ];
+
+    public function getNameAttribute(): string
+    {
+        return $this->attributes['first_name'] . ' ' . $this->attributes['last_name'];
+    }
 }

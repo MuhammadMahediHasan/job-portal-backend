@@ -30,6 +30,6 @@ class Job extends Model
 
     public function applies(): HasMany
     {
-        return $this->hasMany(Apply::class);
+        return $this->hasMany(Apply::class, 'jobs_id');
     }
 }

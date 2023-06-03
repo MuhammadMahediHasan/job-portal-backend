@@ -24,9 +24,11 @@ class JobSeekerRegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name',
-            'email',
-            'password',
+            'title' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed',
         ];
     }
 

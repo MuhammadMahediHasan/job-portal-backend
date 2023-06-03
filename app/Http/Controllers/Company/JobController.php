@@ -50,7 +50,9 @@ class JobController extends Controller
     {
         try {
             DB::beginTransaction();
-            $model = new Job();
+            $model = Job::query()->firstOrNew([
+                'id' => $request->get('id')
+            ]);
             $model->fill($request->fields());
             $model->save();
             DB::commit();
@@ -78,9 +80,20 @@ class JobController extends Controller
     }
 
     /**
+     * @return \Illuminate\Contracts\Foundation\Application|Factory|View|Application|RedirectResponse
+     */
+    public function edit($id): Application|View|Factory|RedirectResponse|\Illuminate\Contracts\Foundation\Application
+    {
+        $jobCategories = JobCategory::query()->get();
+        $job = Job::query()->findOrFail($id);
+
+        return view('frontend.profile.company.job-post', compact('jobCategories', 'job'));
+    }
+
+    /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Job $job): JsonResponse
+    public function destroy(Job $job): RedirectResponse
     {
         try {
             DB::beginTransaction();
@@ -88,9 +101,11 @@ class JobController extends Controller
             $job->delete();
             DB::commit();
 
-            return successResponse($job);
+            Toastr::success('Success', "Job Deleted Successful");
+            return back();
         } catch (\Exception $exception) {
-            return errorResponse([], $exception->getMessage());
+            Toastr::error('Error', 'Something went wrong!');
+            return back();
         }
     }
 }

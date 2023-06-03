@@ -17,9 +17,11 @@ use Toastr;
 
 class CompanyAuthController
 {
-    public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    public function registerForm(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('frontend.auth.login');
+        $jobTypes = Company::TYPES;
+
+        return view('frontend.auth.company-register', compact('jobTypes'));
     }
 
     public function register(CompanyRegisterRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
@@ -39,6 +41,11 @@ class CompanyAuthController
         }
     }
 
+    public function loginForm(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    {
+        return view('frontend.auth.login');
+    }
+
     public function login(CompanyLoginRequest $request): RedirectResponse
     {
         try {
@@ -49,7 +56,7 @@ class CompanyAuthController
                 return back();
             }
 
-            return redirect('company/login');
+            return redirect('company/profile');
         } catch (\Exception $exception) {
             Toastr::error('Error', 'Something went wrong!');
             return back();

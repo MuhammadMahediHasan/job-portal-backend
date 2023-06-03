@@ -25,11 +25,26 @@
                                 <td>{{ $job->job_nature }}</td>
                                 <td>{{ $job->vacancy }}</td>
                                 <td>{{ date('d-m-Y', strtotime($job->dead_line)) }}</td>
-                                <td></td>
+                                <td>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="/company/profile/jobs/{{ $job->id }}/edit"
+                                           class="btn btn-sm btn-info text-white">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <form method="POST" action="/company/profile/jobs/{{ $job->id }}">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+
+                                            <button class="btn btn-sm btn-danger">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="8"></td>
+                                <th colspan="8">No Job Found</th>
                             </tr>
                         @endforelse
                         </tbody>

@@ -16,12 +16,17 @@ use Toastr;
 
 class JobSeekerAuthController
 {
-    public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    public function registerForm(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    {
+        return view('frontend.auth.job-seeker-register');
+    }
+
+    public function loginForm(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         return view('frontend.auth.login');
     }
 
-    public function register(JobSeekerRegisterRequest $request): JsonResponse
+    public function register(JobSeekerRegisterRequest $request)
     {
         try {
             $model = new JobSeeker();
@@ -29,8 +34,10 @@ class JobSeekerAuthController
             $model->save();
 
             Toastr::success('Success', "Registration Successful");
+            return redirect('job-seeker/login');
         } catch (\Exception $exception) {
             Toastr::error('Error', 'Something went wrong!');
+            return back();
         }
     }
 

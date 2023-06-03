@@ -42,6 +42,9 @@
                                                 id="company-name"
                                                 placeholder="Company Type">
                                             <option>Select</option>
+                                            @foreach($jobTypes as $key => $value)
+                                            <option @selected($key === old('type')) value="{{ $key }}">{{ $value }}</option>
+                                            @endforeach
                                         </select>
                                         <label for="company-name">Company Type</label>
                                     </div>

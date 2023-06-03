@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\CompanyAuthController;
+use App\Http\Controllers\Auth\JobSeekerAuthController;
 use App\Http\Controllers\Company\JobController;
 use App\Http\Controllers\Company\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -26,9 +27,9 @@ Route::get('/job-seeker/register', function () {
 });
 
 Route::prefix('company')->group(function () {
-    Route::get('register', [CompanyAuthController::class, 'index']);
+    Route::get('register', [CompanyAuthController::class, 'registerForm']);
     Route::post('register', [CompanyAuthController::class, 'register']);
-    Route::get('login', [CompanyAuthController::class, 'index']);
+    Route::get('login', [CompanyAuthController::class, 'loginForm']);
     Route::post('login', [CompanyAuthController::class, 'login']);
     Route::get('logout', [CompanyAuthController::class, 'logout']);
 
@@ -40,6 +41,19 @@ Route::prefix('company')->group(function () {
         Route::get('/user', function () {
             return \Illuminate\Support\Facades\Auth::user();
         });
+    });
+});
+
+Route::prefix('job-seeker')->group(function () {
+    Route::get('register', [JobSeekerAuthController::class, 'registerForm']);
+    Route::post('register', [JobSeekerAuthController::class, 'register']);
+    Route::get('login', [JobSeekerAuthController::class, 'loginForm']);
+    Route::post('login', [JobSeekerAuthController::class, 'login']);
+    Route::get('logout', [JobSeekerAuthController::class, 'logout']);
+
+    Route::group(['middleware' => ['auth:job_seeker']], function () {
+        Route::get('profile', [ProfileController::class, 'index']);
+        Route::get('profile/edit', [ProfileController::class, 'edit']);
     });
 });
 

@@ -5,6 +5,7 @@
 
             <form action="/company/profile/jobs" method="POST">
                 @csrf
+                <input type="hidden" name="id" value="{{ $job->id ?? '' }}"/>
                 <div class="row mt-2">
                     <div class="col-6">
                         <div class="form-floating">
@@ -14,7 +15,10 @@
                                     placeholder="Company Type">
                                 <option value="">Select</option>
                                 @foreach($jobCategories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option
+                                        @selected($job->job_categories_id ?? '')
+                                        value="{{ $category->id }}">{{ $category->name }}
+                                    </option>
                                 @endforeach
                             </select>
                             <label for="job_categories_id">Category</label>

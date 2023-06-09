@@ -14,4 +14,9 @@ class JobSeekerSkill extends Model
         'job_seekers_id',
         'description',
     ];
+
+    public function skill(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Skill::class);
+    }
 }

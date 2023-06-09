@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedInteger('companies_id');
             $table->unsignedInteger('job_seekers_id');
             $table->string('designation');
+            $table->string('address')->nullable();
             $table->date('from_date');
             $table->date('to_date')->nullable();
             $table->boolean('is_present')->default(false);

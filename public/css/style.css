@@ -754,3 +754,6 @@ p {
     height: 100%;
     padding: 100px 0px;
 }
+.cursor-pointer {
+    cursor: pointer;
+}

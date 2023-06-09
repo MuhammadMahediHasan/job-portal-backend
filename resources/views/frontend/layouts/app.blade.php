@@ -34,34 +34,7 @@
     <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('lib/wow/wow.min.js') }}"></script>
-    <script src="{{ asset('lib/easing/easing.min.js') }}"></script>
-    <script src="{{ asset('lib/waypoints/waypoints.min.js') }}"></script>
-    <script src="{{ asset('lib/owlcarousel/owl.carousel.min.js') }}"></script>
-
-    <!-- Template Javascript -->
-    <script src="{{ asset('js/main.js') }}"></script>
-
-    <script>
-
-        function activeHeaderCarousel() {
-            $(".header-carousel").owlCarousel({
-                autoplay: true,
-                smartSpeed: 1500,
-                items: 1,
-                dots: true,
-                loop: true,
-                nav: true,
-                navText: [
-                    '<i class="bi bi-chevron-left"></i>',
-                    '<i class="bi bi-chevron-right"></i>'
-                ]
-            });
-        }
-    </script>
+    @yield('styles')
 </head>
 
 <body>
@@ -77,7 +50,35 @@
         <a href="/" class="btn btn-sm btn-default btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 </div>
-<script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ asset('lib/wow/wow.min.js') }}"></script>
+<script src="{{ asset('lib/easing/easing.min.js') }}"></script>
+<script src="{{ asset('lib/waypoints/waypoints.min.js') }}"></script>
+<script src="{{ asset('lib/owlcarousel/owl.carousel.min.js') }}"></script>
+
+<!-- Template Javascript -->
+<script src="{{ asset('js/main.js') }}"></script>
+
+<script>
+
+    function activeHeaderCarousel() {
+        $(".header-carousel").owlCarousel({
+            autoplay: true,
+            smartSpeed: 1500,
+            items: 1,
+            dots: true,
+            loop: true,
+            nav: true,
+            navText: [
+                '<i class="bi bi-chevron-left"></i>',
+                '<i class="bi bi-chevron-right"></i>'
+            ]
+        });
+    }
+</script>
 <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 <script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script>
@@ -85,6 +86,9 @@
         $('#dataTable').DataTable();
     });
 </script>
+
+@yield('scripts')
+
 {!! Toastr::message() !!}
 </body>
 </html>

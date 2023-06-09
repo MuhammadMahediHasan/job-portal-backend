@@ -29,12 +29,14 @@ class JobSeekerAuthController
     public function register(JobSeekerRegisterRequest $request)
     {
         try {
-            $model = new JobSeeker();
+            $model = JobSeeker::query()->firstOrNew([
+                'id' => $request->get('id')
+            ]);
             $model->fill($request->fields());
             $model->save();
 
             Toastr::success('Success', "Registration Successful");
-            return redirect('job-seeker/login');
+            return redirect('/');
         } catch (\Exception $exception) {
             Toastr::error('Error', 'Something went wrong!');
             return back();
@@ -51,7 +53,7 @@ class JobSeekerAuthController
                 return back();
             }
 
-            return redirect('job-seeker/login');
+            return redirect('job-seeker/profile');
         } catch (\Exception $exception) {
             Toastr::error('Error', 'Something went wrong!');
             return back();

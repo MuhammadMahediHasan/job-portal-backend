@@ -42,7 +42,7 @@ if (!file_exists('jobSeekerAuthCheck')) {
 }
 
 if (!file_exists('companyAuthUser')) {
-    function companyAuthUser(): Authenticatable
+    function companyAuthUser(): Authenticatable|null
     {
         return auth()->guard('company')->user();
     }
@@ -69,7 +69,7 @@ if (!file_exists('profileName')) {
 }
 
 if (!file_exists('authUser')) {
-    function authUser(): string|Authenticatable
+    function authUser(): string|Authenticatable|null
     {
         if (companyAuthCheck()) {
             return companyAuthUser();

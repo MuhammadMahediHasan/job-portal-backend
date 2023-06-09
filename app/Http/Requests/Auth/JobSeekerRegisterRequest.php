@@ -28,14 +28,16 @@ class JobSeekerRegisterRequest extends FormRequest
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required|email',
-            'password' => 'required|confirmed',
+            'password' => request('id') ? 'sometimes' : 'required|confirmed',
         ];
     }
 
     public function fields(): array
     {
         $request = request()->all();
-        $request['password'] = Hash::make($request['password']);
+        if (!request('id')) {
+            $request['password'] = Hash::make($request['password']);
+        }
 
         return $request;
     }

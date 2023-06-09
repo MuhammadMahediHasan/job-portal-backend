@@ -4,6 +4,10 @@ use App\Http\Controllers\Auth\CompanyAuthController;
 use App\Http\Controllers\Auth\JobSeekerAuthController;
 use App\Http\Controllers\Company\JobController;
 use App\Http\Controllers\Company\ProfileController;
+use App\Http\Controllers\JobSeeker\EducationalInfoController;
+use App\Http\Controllers\JobSeeker\ProfessionalInfoController;
+use App\Http\Controllers\JobSeeker\SkillController;
+use App\Http\Controllers\JobSeeker\UploadResumeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,8 +56,22 @@ Route::prefix('job-seeker')->group(function () {
     Route::get('logout', [JobSeekerAuthController::class, 'logout']);
 
     Route::group(['middleware' => ['auth:job_seeker']], function () {
-        Route::get('profile', [ProfileController::class, 'index']);
-        Route::get('profile/edit', [ProfileController::class, 'edit']);
+        Route::get('profile', [\App\Http\Controllers\JobSeeker\ProfileController::class, 'index']);
+
+        Route::get('profile/professional-info', [ProfessionalInfoController::class, 'index']);
+        Route::post('profile/professional-info', [ProfessionalInfoController::class, 'store']);
+        Route::get('profile/professional-info/{id}/delete', [ProfessionalInfoController::class, 'delete']);
+
+        Route::get('profile/educational-info', [EducationalInfoController::class, 'index']);
+        Route::post('profile/educational-info', [EducationalInfoController::class, 'store']);
+        Route::get('profile/educational-info/{id}/delete', [EducationalInfoController::class, 'delete']);
+
+        Route::get('profile/skill', [SkillController::class, 'index']);
+        Route::post('profile/skill', [SkillController::class, 'store']);
+        Route::get('profile/skill/{id}/delete', [SkillController::class, 'delete']);
+
+        Route::get('profile/upload-resume', [UploadResumeController::class, 'index']);
+        Route::post('profile/upload-resume', [UploadResumeController::class, 'store']);
     });
 });
 

@@ -49,7 +49,7 @@ if (!file_exists('companyAuthUser')) {
 }
 
 if (!file_exists('jobSeekerAuthUser')) {
-    function jobSeekerAuthUser(): Authenticatable
+    function jobSeekerAuthUser(): Authenticatable|null
     {
         return auth()->guard('job_seeker')->user();
     }
@@ -78,5 +78,12 @@ if (!file_exists('authUser')) {
         }
 
         return collect([]);
+    }
+}
+
+if (!file_exists('dateFormat')) {
+    function dateFormat($date): string
+    {
+        return date("j F, Y", strtotime($date));
     }
 }

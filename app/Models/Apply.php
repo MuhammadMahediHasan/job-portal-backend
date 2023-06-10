@@ -12,6 +12,7 @@ class Apply extends Model
     protected $fillable = [
         'jobs_id',
         'job_seekers_id',
+        'resume',
         'description'
     ];
 }

@@ -40,13 +40,15 @@
 
                 <div class="row mt-2">
                     <div class="col-12">
+
+                        <label for="description">Description</label>
                         <div class="form-floating">
-                            <input name="description"
-                                   value="{{ old('description', $job->description ?? '') }}"
-                                   class="form-control"
+                            <textarea name="description"
+                                   class="form-control ckeditor"
                                    id="description"
-                                   placeholder="Description"/>
-                            <label for="description">Description</label>
+                                   placeholder="Description">
+                                {{ old('description', $job->description ?? '') }}
+                            </textarea>
                             <small class="text-danger">{{ $errors->first('description') }}</small>
                         </div>
                     </div>
@@ -129,4 +131,12 @@
             </form>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.ckeditor').ckeditor();
+        });
+    </script>
 @endsection

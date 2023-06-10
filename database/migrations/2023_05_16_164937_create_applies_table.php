@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedInteger('jobs_id');
             $table->unsignedInteger('job_seekers_id');
+            $table->string('resume')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
         });

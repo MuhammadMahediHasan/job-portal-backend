@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Str;
 
 class Job extends Model
 {
@@ -14,6 +16,7 @@ class Job extends Model
     protected $fillable = [
         'job_categories_id',
         'companies_id',
+        'slug',
         'title',
         'description',
         'location',
@@ -23,6 +26,27 @@ class Job extends Model
         'dead_line',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($job) {
+            $job->slug = $job->createSlug($job->title);
+            $job->save();
+        });
+    }
+
+    private function createSlug($title): array|string|null
+    {
+        $slug = Str::slug($title);
+        $existingSlug = static::where('slug', $slug)->get();
+        if ($existingSlug) {
+            $slug = $slug . '-' . $existingSlug->count() . uniqid();
+        }
+
+        return $slug;
+    }
+
     public function jobCategory(): BelongsTo
     {
         return $this->belongsTo(JobCategory::class, 'job_categories_id');
@@ -31,5 +55,11 @@ class Job extends Model
     public function applies(): HasMany
     {
         return $this->hasMany(Apply::class, 'jobs_id');
+    }
+
+    public function jobSeekerApply(): HasOne
+    {
+        return $this->hasOne(Apply::class, 'jobs_id')
+            ->where('job_seekers_id', jobSeekerAuthUser()->id ?? '');
     }
 }

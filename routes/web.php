@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\ApplyController;
 use App\Http\Controllers\Auth\CompanyAuthController;
 use App\Http\Controllers\Auth\JobSeekerAuthController;
 use App\Http\Controllers\Company\JobController;
 use App\Http\Controllers\Company\ProfileController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobSeeker\EducationalInfoController;
 use App\Http\Controllers\JobSeeker\ProfessionalInfoController;
 use App\Http\Controllers\JobSeeker\SkillController;
@@ -21,10 +23,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('frontend.components.home');
-});
-
+Route::get('/', [HomeController::class, 'index']);
+Route::get('job-details/{slug}', [HomeController::class, 'jobDetails']);
 
 Route::get('/job-seeker/register', function () {
     return view('frontend.auth.job-seeker-register');
@@ -54,6 +54,7 @@ Route::prefix('job-seeker')->group(function () {
     Route::get('login', [JobSeekerAuthController::class, 'loginForm']);
     Route::post('login', [JobSeekerAuthController::class, 'login']);
     Route::get('logout', [JobSeekerAuthController::class, 'logout']);
+    Route::post('apply', [ApplyController::class, 'store']);
 
     Route::group(['middleware' => ['auth:job_seeker']], function () {
         Route::get('profile', [\App\Http\Controllers\JobSeeker\ProfileController::class, 'index']);

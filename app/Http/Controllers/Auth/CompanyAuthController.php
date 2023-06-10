@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Requests\Auth\CompanyLoginRequest;
 use App\Http\Requests\Auth\CompanyRegisterRequest;
 use App\Models\Company;
+use App\Models\JobSeeker;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -30,8 +31,16 @@ class CompanyAuthController
             $model = Company::query()->firstOrNew([
                 'id' => $request->input('id')
             ]);
+
             $model->fill($request->fields());
             $model->save();
+
+            if ($request->hasFile('profile_image')) {
+                $path = "company-profile-images/";
+                $name = $model->id . ".jpg";
+                $request->file('profile_image')->move($path, $name);
+
+            }
 
             Toastr::success('Success', "Login Successful");
             return redirect('/');
@@ -67,6 +76,6 @@ class CompanyAuthController
     {
         Auth::guard('company')->logout();
 
-        return back();
+        return redirect('/');
     }
 }

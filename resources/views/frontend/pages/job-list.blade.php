@@ -4,50 +4,66 @@
         <div class="overlay">
             <div class="container">
                 <h3>Search for a Job</h3>
-                <div class="row sm-gutters">
-                    <div class="col-sm-12">
-                        <form>
+                <form>
+                    <div class="row sm-gutters">
+                        <div class="col-sm-12">
                             <div class="form-group">
-                                <input type="text" name="title" placeholder="Job title, skills, keywords etc..."
-                                       class="form-control" autoComplete="off"/>
-                                <button type="submit" class="search-button">
-                                    <i class="fa fa-search"></i>
-                                </button>
+                                <input type="text" name="search"
+                                       placeholder="Job title, skills, keywords etc..."
+                                       class="form-control title" autoComplete="off"/>
                             </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="row sm-gutters mt-3">
-                    <div class="col-sm-4">
-                        <div class="form-group select">
-                            <select name="industry" placeholder="Industry" class="form-control">
-                                <option>Category</option>
-                                <option>Education</option>
-                                <option>Real State/Developers</option>
-                                <option>Information Technology</option>
-                                <option>Garments/Textile</option>
-                            </select>
                         </div>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="form-group select">
-                            <select name="industry" placeholder="Industry" class="form-control">
-                                <option>Job Package</option>
-                                <option>Classic</option>
-                                <option>Premium</option>
-                            </select>
+                    <div class="row sm-gutters mt-3">
+                        <div class="col-sm-3">
+                            <div class="form-group select">
+                                <select name="category_id" placeholder="category" class="form-control category">
+                                    <option value="">Select Category</option>
+                                    @foreach($categories as $category)
+                                        <option
+                                            @selected(request('category') == $category->id)
+                                            value="{{ $category->id }}">
+                                            {{ $category->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group select">
+                                <select name="type" placeholder="type" class="form-control type">
+                                    <option>Job Type</option>
+                                    @foreach($types as $key => $type)
+                                        <option
+                                            @selected(request('type') == $key)
+                                            value="{{ $type }}">
+                                            {{ $type }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group select">
+                                <select name="skill_id" placeholder="skill" class="form-control skill">
+                                    <option>Select Skill</option>
+                                    @foreach($skills as $skill)
+                                        <option
+                                            @selected(request('skill') == $skill->id)
+                                            value="{{ $skill->id }}">
+                                            {{ $skill->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <button class="btn btn-block btn-primary">
+                                <i class="fa fa-search"></i>&nbsp;Search
+                            </button>
                         </div>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="form-group select">
-                            <select name="industry" placeholder="Industry" class="form-control">
-                                <option>Select Skill</option>
-                                <option>General</option>
-                                <option>Special Skilled</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -108,147 +124,15 @@
             <div class="col-sm-9">
                 <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
 
-                    <div class="job-item p-4 mb-4">
-                        <div class="row g-4">
-                            <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid border rounded"
-                                     src="/img/com-logo-1.jpg" alt="" style="width: 80px; height: 80px;"/>
-                                <div class="text-start ps-4">
-                                    <h5 class="mb-3">Software Engineer</h5>
-                                    <span class="text-truncate me-3"><i
-                                            class="fa fa-map-marker-alt text-primary me-2"></i>New York, USA</span>
-                                    <span class="text-truncate me-3"><i
-                                            class="far fa-clock text-primary me-2"></i>Full Time</span>
-                                    <span class="text-truncate me-0"><i
-                                            class="far fa-money-bill-alt text-primary me-2"></i>$123 - $456</span>
-                                </div>
-                            </div>
-                            <div
-                                class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
-                                <div class="d-flex mb-3">
-                                    <a class="btn btn-light btn-square me-3" href=""><i
-                                            class="far fa-heart text-primary"></i></a>
-                                    <a class="btn btn-primary" href="">Apply Now</a>
-                                </div>
-                                <small class="text-truncate"><i
-                                        class="far fa-calendar-alt text-primary me-2"></i>Date Line: 01 Jan,
-                                    2045</small>
-                            </div>
-                        </div>
+                    @foreach($jobs as $job)
+                        @include('frontend.components.job')
+                    @endforeach
+
+                    <div class="pagination-wrapper float-end">
+                        {{ $jobs->onEachSide(5)->links() }}
                     </div>
-                    <div class="job-item p-4 mb-4">
-                        <div class="row g-4">
-                            <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid border rounded"
-                                     src="/img/com-logo-2.jpg" alt="" style="width: 80px; height: 80px;"/>
-                                <div class="text-start ps-4">
-                                    <h5 class="mb-3">Marketing Manager</h5>
-                                    <span class="text-truncate me-3"><i
-                                            class="fa fa-map-marker-alt text-primary me-2"></i>New York, USA</span>
-                                    <span class="text-truncate me-3"><i
-                                            class="far fa-clock text-primary me-2"></i>Full Time</span>
-                                    <span class="text-truncate me-0"><i
-                                            class="far fa-money-bill-alt text-primary me-2"></i>$123 - $456</span>
-                                </div>
-                            </div>
-                            <div
-                                class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
-                                <div class="d-flex mb-3">
-                                    <a class="btn btn-light btn-square me-3" href=""><i
-                                            class="far fa-heart text-primary"></i></a>
-                                    <a class="btn btn-primary" href="">Apply Now</a>
-                                </div>
-                                <small class="text-truncate"><i
-                                        class="far fa-calendar-alt text-primary me-2"></i>Date Line: 01 Jan,
-                                    2045</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="job-item p-4 mb-4">
-                        <div class="row g-4">
-                            <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid border rounded"
-                                     src="/img/com-logo-3.jpg" alt="" style="width: 80px; height: 80px;"/>
-                                <div class="text-start ps-4">
-                                    <h5 class="mb-3">Product Designer</h5>
-                                    <span class="text-truncate me-3"><i
-                                            class="fa fa-map-marker-alt text-primary me-2"></i>New York, USA</span>
-                                    <span class="text-truncate me-3"><i
-                                            class="far fa-clock text-primary me-2"></i>Full Time</span>
-                                    <span class="text-truncate me-0"><i
-                                            class="far fa-money-bill-alt text-primary me-2"></i>$123 - $456</span>
-                                </div>
-                            </div>
-                            <div
-                                class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
-                                <div class="d-flex mb-3">
-                                    <a class="btn btn-light btn-square me-3" href=""><i
-                                            class="far fa-heart text-primary"></i></a>
-                                    <a class="btn btn-primary" href="">Apply Now</a>
-                                </div>
-                                <small class="text-truncate"><i
-                                        class="far fa-calendar-alt text-primary me-2"></i>Date Line: 01 Jan,
-                                    2045</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="job-item p-4 mb-4">
-                        <div class="row g-4">
-                            <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid border rounded"
-                                     src="/img/com-logo-4.jpg" alt="" style="width: 80px; height: 80px;"/>
-                                <div class="text-start ps-4">
-                                    <h5 class="mb-3">Creative Director</h5>
-                                    <span class="text-truncate me-3"><i
-                                            class="fa fa-map-marker-alt text-primary me-2"></i>New York, USA</span>
-                                    <span class="text-truncate me-3"><i
-                                            class="far fa-clock text-primary me-2"></i>Full Time</span>
-                                    <span class="text-truncate me-0"><i
-                                            class="far fa-money-bill-alt text-primary me-2"></i>$123 - $456</span>
-                                </div>
-                            </div>
-                            <div
-                                class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
-                                <div class="d-flex mb-3">
-                                    <a class="btn btn-light btn-square me-3" href=""><i
-                                            class="far fa-heart text-primary"></i></a>
-                                    <a class="btn btn-primary" href="">Apply Now</a>
-                                </div>
-                                <small class="text-truncate"><i
-                                        class="far fa-calendar-alt text-primary me-2"></i>Date Line: 01 Jan,
-                                    2045</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="job-item p-4 mb-4">
-                        <div class="row g-4">
-                            <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                                <img class="flex-shrink-0 img-fluid border rounded"
-                                     src="/img/com-logo-5.jpg" alt="" style="width: 80px; height: 80px;"/>
-                                <div class="text-start ps-4">
-                                    <h5 class="mb-3">Wordpress Developer</h5>
-                                    <span class="text-truncate me-3"><i
-                                            class="fa fa-map-marker-alt text-primary me-2"></i>New York, USA</span>
-                                    <span class="text-truncate me-3"><i
-                                            class="far fa-clock text-primary me-2"></i>Full Time</span>
-                                    <span class="text-truncate me-0"><i
-                                            class="far fa-money-bill-alt text-primary me-2"></i>$123 - $456</span>
-                                </div>
-                            </div>
-                            <div
-                                class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
-                                <div class="d-flex mb-3">
-                                    <a class="btn btn-light btn-square me-3" href=""><i
-                                            class="far fa-heart text-primary"></i></a>
-                                    <a class="btn btn-primary" href="">Apply Now</a>
-                                </div>
-                                <small class="text-truncate"><i
-                                        class="far fa-calendar-alt text-primary me-2"></i>Date Line: 01 Jan,
-                                    2045</small>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="btn btn-primary py-3 px-5" href="">Browse More Jobs</a>
+
+                    {{-- <a class="btn btn-primary py-3 px-5" href="">Browse More Jobs</a>--}}
                 </div>
             </div>
         </div>

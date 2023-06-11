@@ -103,6 +103,11 @@
                     @foreach($jobs as $job)
                         @include('frontend.components.job')
                     @endforeach
+                    <div class="col-12">
+                        <center>
+                            <a href="/jobs" class="btn btn-primary">Show more</a>
+                        </center>
+                    </div>
                 </div>
             </div>
         </div>

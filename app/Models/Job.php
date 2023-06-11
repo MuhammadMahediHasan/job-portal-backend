@@ -26,6 +26,13 @@ class Job extends Model
         'dead_line',
     ];
 
+    const TYPES = [
+        1 => 'Full Time',
+        2 => 'Part Time',
+        3 => 'Remote',
+        4 => 'Hybrid',
+    ];
+
     protected static function boot()
     {
         parent::boot();

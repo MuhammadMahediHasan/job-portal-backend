@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('job-details/{slug}', [HomeController::class, 'jobDetails']);
+Route::get('jobs', [\App\Http\Controllers\JobController::class, 'index']);
 
 Route::get('/job-seeker/register', function () {
     return view('frontend.auth.job-seeker-register');

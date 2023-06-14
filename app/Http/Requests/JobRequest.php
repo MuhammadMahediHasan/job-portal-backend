@@ -24,6 +24,7 @@ class JobRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
             'id' => 'sometimes',
             'job_categories_id' => 'required',

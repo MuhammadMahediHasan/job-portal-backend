@@ -16,7 +16,7 @@
                                 <option value="">Select</option>
                                 @foreach($jobCategories as $category)
                                     <option
-                                        @selected($job->job_categories_id ?? '')
+                                        @selected(isset($job->job_categories_id) && $job->job_categories_id == $category->id)
                                         value="{{ $category->id }}">{{ $category->name }}
                                     </option>
                                 @endforeach
@@ -44,9 +44,9 @@
                         <label for="description">Description</label>
                         <div class="form-floating">
                             <textarea name="description"
-                                   class="form-control ckeditor"
-                                   id="description"
-                                   placeholder="Description">
+                                      class="form-control ckeditor"
+                                      id="description"
+                                      placeholder="Description">
                                 {{ old('description', $job->description ?? '') }}
                             </textarea>
                             <small class="text-danger">{{ $errors->first('description') }}</small>
@@ -82,12 +82,18 @@
                 <div class="row mt-2">
                     <div class="col-6">
                         <div class="form-floating">
-                            <input name="job_nature"
-                                   value="{{ old('job_nature', $job->job_nature ?? '') }}"
-                                   type="text"
-                                   class="form-control"
-                                   id="job_nature"
-                                   placeholder="Job Nature"/>
+                            <select class="form-control"
+                                    id="job_nature"
+                                    name="job_nature"
+                                    placeholder="Job Nature">
+                                <option value="">Select</option>
+                                @foreach($types as $key => $type)
+                                    <option
+                                        @selected(isset($job->job_nature) && $job->job_nature == $key)
+                                        value="{{ $key }}">{{ $type }}
+                                    </option>
+                                @endforeach
+                            </select>
                             <label for="job_nature">Job Nature</label>
                             <small class="text-danger">{{ $errors->first('job_nature') }}</small>
                         </div>
@@ -118,6 +124,28 @@
                             <label for="dead_line">Dead Line</label>
                             <small class="text-danger">{{ $errors->first('dead_line') }}</small>
                         </div>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <select class="form-control select2-input"
+                                id="skill_id"
+                                name="skill_id[]"
+                                placeholder="Skill" multiple>
+                            <option value="">Select</option>
+                            @foreach($skills as $skill)
+                                <option
+                                    @if(old('skill_id') && in_array($skill->id, old('skill_id')))
+                                        selected
+                                    @elseif(isset($oldSkill) && in_array($skill->id, $oldSkill))
+                                        selected
+                                    @endif
+                                    value="{{ $skill->id }}">{{ $skill->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <small class="text-danger">{{ $errors->first('skill_id') }}</small>
                     </div>
                 </div>
 

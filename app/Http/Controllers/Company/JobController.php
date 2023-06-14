@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Company;
 
+use App\Actions\JobSkillAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\JobRequest;
 use App\Models\Job;
 use App\Models\JobCategory;
 use App\Models\JobSeeker;
+use App\Models\Skill;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -39,8 +41,13 @@ class JobController extends Controller
 
     public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
+        $types = Job::TYPES;
+        $skills = Skill::query()->select('id', 'name')->get();
         $jobCategories = JobCategory::query()->get();
-        return view('frontend.profile.company.job-post', compact('jobCategories'));
+
+        return view('frontend.profile.company.job-post',
+            compact('jobCategories', 'skills', 'types')
+        );
     }
 
     /**
@@ -55,6 +62,9 @@ class JobController extends Controller
             ]);
             $model->fill($request->fields());
             $model->save();
+
+            JobSkillAction::attach($request->get('skill_id'), $model);
+
             DB::commit();
 
             Toastr::success('Success', "Job Successful");
@@ -84,10 +94,15 @@ class JobController extends Controller
      */
     public function edit($id): Application|View|Factory|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
+        $types = Job::TYPES;
+        $skills = Skill::query()->select('id', 'name')->get();
         $jobCategories = JobCategory::query()->get();
-        $job = Job::query()->findOrFail($id);
+        $job = Job::query()->with('skills')->findOrFail($id);
+        $oldSkill = $job->skills()->pluck('skill_id')->toArray();
 
-        return view('frontend.profile.company.job-post', compact('jobCategories', 'job'));
+        return view('frontend.profile.company.job-post',
+            compact('jobCategories', 'job', 'oldSkill', 'skills', 'types')
+        );
     }
 
     /**

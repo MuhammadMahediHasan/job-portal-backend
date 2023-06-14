@@ -23,21 +23,23 @@ class JobController
         $type = $request->get('type');
         $skillId = $request->get('skill_id');
         $jobs = Job::query()
-            ->with('jobCategory')
+            ->with(['jobCategory', 'skills'])
             ->join('companies', 'companies.id', 'jobs.companies_id')
             ->when($search, function ($query) use ($search) {
-                $query->whereLike('title', $search)
-                    ->orWhereLike('location', $search)
-                    ->orWhereLike('salary_range', $search)
+                $query->where('title', 'LIKE', "%{$search}%")
+                    ->orWhere('location', 'LIKE', "%{$search}%")
+                    ->orWhere('salary_range', 'LIKE', "%{$search}%")
                     ->orWhereHas('jobCategory', function ($query) use ($search) {
-                        $query->whereLike('title', $search);
+                        $query->where('title', 'LIKE', "%{$search}%");
                     });
             })
             ->when($categoryId, function ($query) use ($categoryId) {
-                $query->where('categories_id', $categoryId);
+                $query->where('job_categories_id', $categoryId);
             })
             ->when($skillId, function ($query) use ($skillId) {
-                $query->where('skills_id', $skillId);
+                $query->whereHas('skills', function ($query) use ($skillId) {
+                    $query->where('skill_id', $skillId);
+                });
             })
             ->when($type, function ($query) use ($type) {
                 $query->where('job_nature', $type);

@@ -7,7 +7,7 @@
                     <div class="col-sm-12">
                         <h1>Employer?</h1>
                         <h2>Find Your Next <span>Talent</span></h2>
-                        <form class="banner-form">
+                        <form class="banner-form" action="/jobs">
                             <div class="row sm-gutters">
                                 <div class="col-sm-7" style="transition: 0.5s">
                                     <div class="form-group">

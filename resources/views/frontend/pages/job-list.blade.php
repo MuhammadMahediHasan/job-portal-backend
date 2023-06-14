@@ -10,6 +10,7 @@
                             <div class="form-group">
                                 <input type="text" name="search"
                                        placeholder="Job title, skills, keywords etc..."
+                                       value="{{ request('search') }}"
                                        class="form-control title" autoComplete="off"/>
                             </div>
                         </div>
@@ -21,7 +22,7 @@
                                     <option value="">Select Category</option>
                                     @foreach($categories as $category)
                                         <option
-                                            @selected(request('category') == $category->id)
+                                            @selected(request('category_id') == $category->id)
                                             value="{{ $category->id }}">
                                             {{ $category->name }}
                                         </option>
@@ -32,11 +33,11 @@
                         <div class="col-sm-3">
                             <div class="form-group select">
                                 <select name="type" placeholder="type" class="form-control type">
-                                    <option>Job Type</option>
+                                    <option value="">Job Type</option>
                                     @foreach($types as $key => $type)
                                         <option
                                             @selected(request('type') == $key)
-                                            value="{{ $type }}">
+                                            value="{{ $key }}">
                                             {{ $type }}
                                         </option>
                                     @endforeach
@@ -46,10 +47,10 @@
                         <div class="col-sm-3">
                             <div class="form-group select">
                                 <select name="skill_id" placeholder="skill" class="form-control skill">
-                                    <option>Select Skill</option>
+                                    <option value="">Select Skill</option>
                                     @foreach($skills as $skill)
                                         <option
-                                            @selected(request('skill') == $skill->id)
+                                            @selected(request('skill_id') == $skill->id)
                                             value="{{ $skill->id }}">
                                             {{ $skill->name }}
                                         </option>

@@ -46,6 +46,7 @@ class HomeController
                 'jobs.location',
                 'jobs.created_at',
                 'jobs.slug',
+                'jobs.job_nature',
                 'type',
                 'jobs.description',
                 'salary_range',

@@ -64,6 +64,11 @@ class Job extends Model
         return $this->hasMany(Apply::class, 'jobs_id');
     }
 
+    public function skills(): HasMany
+    {
+        return $this->hasMany(JobSkill::class, 'job_id');
+    }
+
     public function jobSeekerApply(): HasOne
     {
         return $this->hasOne(Apply::class, 'jobs_id')

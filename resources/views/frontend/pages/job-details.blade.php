@@ -68,11 +68,14 @@
                         <img class="flex-shrink-0 img-fluid border rounded"
                              src="{{ asset('company-profile-images/' . $job->company_id . '.jpg') }}" alt=""
                              style="width: 80px; height: 80px;"/>
+
                         <div class="text-start ps-4">
                             <h3 class="mb-3">{{ $job->title }}</h3>
                             <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ $job->location }}</span>
-                            <span class="text-truncate me-3"><i
-                                    class="far fa-clock text-primary me-2"></i>{{ $job->type }}</span>
+                            <span class="text-truncate me-3">
+                                <i class="far fa-clock text-primary me-2"></i>
+                                {{ \App\Models\Job::TYPES[$job->job_nature] ?? ''  }}
+                            </span>
                             <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{ $job->salary_range }}</span>
                         </div>
                     </div>

@@ -15,4 +15,14 @@ class Apply extends Model
         'resume',
         'description'
     ];
+
+    public function job(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Job::class, 'jobs_id');
+    }
+
+    public function jobSeeker()
+    {
+        return $this->belongsTo(JobSeeker::class, 'job_seekers_id');
+    }
 }

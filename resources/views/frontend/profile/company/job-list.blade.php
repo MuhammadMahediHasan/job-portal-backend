@@ -31,6 +31,10 @@
                                            class="btn btn-sm btn-info text-white">
                                             <i class="fa fa-edit"></i>
                                         </a>
+                                        <a href="/company/profile/jobs/{{ $job->id }}/apply" title="Apply"
+                                           class="btn btn-sm btn-default text-white">
+                                            <i class="fa fa-user"></i>
+                                        </a>
                                         <form method="POST" action="/company/profile/jobs/{{ $job->id }}">
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}

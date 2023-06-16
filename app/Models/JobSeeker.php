@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -33,5 +34,16 @@ class JobSeeker extends Authenticatable
     public function getNameAttribute(): string
     {
         return $this->attributes['first_name'] . ' ' . $this->attributes['last_name'];
+    }
+
+    public function currentCompany(): HasOne
+    {
+        return $this->hasOne(JobSeekerExperience::class, 'job_seekers_id')
+            ->where(function ($query) {
+                $query->whereNull('to_date')
+                    ->orWhere(function ($query) {
+                        $query->latest();
+                    });
+            });
     }
 }

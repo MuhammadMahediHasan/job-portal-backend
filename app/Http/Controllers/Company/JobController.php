@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Company;
 use App\Actions\JobSkillAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\JobRequest;
+use App\Models\Apply;
 use App\Models\Job;
 use App\Models\JobCategory;
 use App\Models\JobSeeker;
@@ -23,7 +24,7 @@ class JobController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application|RedirectResponse
     {
         try {
             $jobs = Job::query()
@@ -118,6 +119,21 @@ class JobController extends Controller
 
             Toastr::success('Success', "Job Deleted Successful");
             return back();
+        } catch (\Exception $exception) {
+            Toastr::error('Error', 'Something went wrong!');
+            return back();
+        }
+    }
+
+    public function apply($id): View|Application|Factory|\Illuminate\Contracts\Foundation\Application|RedirectResponse
+    {
+        try {
+            $applies = Apply::query()
+                ->with(['job', 'jobSeeker.currentCompany'])
+                ->where('jobs_id', $id)
+                ->get();
+
+            return view('frontend.profile.company.apply-list', compact('applies'));
         } catch (\Exception $exception) {
             Toastr::error('Error', 'Something went wrong!');
             return back();

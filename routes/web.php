@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\ApplyController;
+use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\Auth\CompanyAuthController;
 use App\Http\Controllers\Auth\JobSeekerAuthController;
 use App\Http\Controllers\Company\JobController;
@@ -33,7 +35,14 @@ Route::get('/job-seeker/register', function () {
 
 
 Route::prefix('admin')->group(function () {
-    Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index']);
+    Route::get('login', [AdminAuthController::class, 'loginForm']);
+    Route::post('login', [AdminAuthController::class, 'login']);
+    Route::get('logout', [AdminAuthController::class, 'logout']);
+    Route::group(['middleware' => ['admin-auth']], function () {
+        Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index']);
+        Route::resource('category', CategoryController::class);
+        Route::resource('skill', \App\Http\Controllers\Admin\SkillController::class);
+    });
 });
 
 Route::prefix('company')->group(function () {
@@ -43,7 +52,7 @@ Route::prefix('company')->group(function () {
     Route::post('login', [CompanyAuthController::class, 'login']);
     Route::get('logout', [CompanyAuthController::class, 'logout']);
 
-    Route::group(['middleware' => ['auth:company']], function () {
+    Route::group(['middleware' => ['company-auth']], function () {
         Route::get('profile', [ProfileController::class, 'index']);
         Route::get('profile/edit', [ProfileController::class, 'edit']);
         Route::resource('profile/jobs', JobController::class);

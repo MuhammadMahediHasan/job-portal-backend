@@ -21,40 +21,40 @@
         </a>
     </li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="/payment">
-                <i class="fas fa-fw fa-money-bill"></i>
-                <span>Category</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/notice">
-                <i class="fas fa-fw fa-bell"></i>
-                <span>Skill</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseuser"
-               aria-expanded="true"
-               aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-user"></i>
-                <span>Users</span>
-            </a>
-            <div id="collapseuser" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="/admin">Admin</a>
-                    <a class="collapse-item" href="/client">Client</a>
-                </div>
+    <li class="nav-item">
+        <a class="nav-link" href="/admin/category">
+            <i class="fas fa-fw fa-money-bill"></i>
+            <span>Category</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/admin/skill">
+            <i class="fas fa-fw fa-bell"></i>
+            <span>Skill</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseuser"
+           aria-expanded="true"
+           aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Users</span>
+        </a>
+        <div id="collapseuser" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="/admin">Admin</a>
+                <a class="collapse-item" href="/client">Client</a>
             </div>
-        </li>
+        </div>
+    </li>
 
-<!-- Heading -->
-{{--    <div class="sidebar-heading">--}}
-{{--        Interface--}}
-{{--    </div>--}}
+    <!-- Heading -->
+    {{--    <div class="sidebar-heading">--}}
+    {{--        Interface--}}
+    {{--    </div>--}}
 
 
-<!-- Divider -->
+    <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 
     <!-- Sidebar Toggler (Sidebar) -->

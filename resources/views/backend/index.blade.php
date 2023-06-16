@@ -31,11 +31,11 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="copyright text-right mr-3">
-                        <a class="footer-developer" href="https://muhammadmahedihasan.github.io/" target="_blank">
-                            <span>Developed By <i class="fa fa-heart text-danger"></i> Muhammad Mahedi Hasan</span>
-                        </a>
-                    </div>
+{{--                    <div class="copyright text-right mr-3">--}}
+{{--                        <a class="footer-developer" href="https://muhammadmahedihasan.github.io/" target="_blank">--}}
+{{--                            <span>Developed By <i class="fa fa-heart text-danger"></i> </span>--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
                 </div>
             </div>
         </footer>

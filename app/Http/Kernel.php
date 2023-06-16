@@ -55,6 +55,9 @@ class Kernel extends HttpKernel
      */
     protected $middlewareAliases = [
         'cors' => \App\Http\Middleware\EnableCors::class,
+        'job-seeker-auth' => \App\Http\Middleware\JobSeekerMiddleware::class,
+        'company-auth' => \App\Http\Middleware\CompanyMiddleware::class,
+        'admin-auth' => \App\Http\Middleware\AdminMiddleware::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,

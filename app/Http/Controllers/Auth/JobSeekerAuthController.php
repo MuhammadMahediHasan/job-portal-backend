@@ -36,7 +36,14 @@ class JobSeekerAuthController
             $model->fill($request->fields());
             $model->save();
 
-            Toastr::success('Success', "Registration Successful");
+            if ($request->hasFile('profile_image')) {
+                $path = "job-seeker-profile-images/";
+                $name = $model->id . ".jpg";
+                $request->file('profile_image')->move($path, $name);
+
+            }
+
+            Toastr::success('Success', "Stored Successful");
             return redirect('/');
         } catch (\Exception $exception) {
             Toastr::error('Error', 'Something went wrong!');

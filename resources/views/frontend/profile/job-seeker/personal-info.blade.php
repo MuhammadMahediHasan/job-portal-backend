@@ -3,7 +3,7 @@
     <div class="card-box">
         <div class="wow fadeInUp" data-wow-delay="0.5s">
 
-            <form action="/job-seeker/register" method="POST">
+            <form action="/job-seeker/register" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="id" value="{{ $profile->id ?? '' }}"/>
                 <div class="row mt-2">
@@ -104,6 +104,17 @@
                         <small class="text-danger">{{ $errors->first('email') }}</small>
                     </div>
                 </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input type="file" class="form-control" id="profile_image" name="profile_image"
+                                   value="{{ old('profile_image', $profile->profile_image ?? '') }}"
+                                   placeholder="Image"/>
+                            <label for="profile_image">Profile Image</label>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row mt-5">
                     <div class="col-12">
                         <button class="btn btn-primary w-100 py-3" type="submit">

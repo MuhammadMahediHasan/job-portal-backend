@@ -72,7 +72,7 @@ Route::prefix('job-seeker')->group(function () {
     Route::get('logout', [JobSeekerAuthController::class, 'logout']);
     Route::post('apply', [ApplyController::class, 'store']);
 
-    Route::group(['middleware' => ['auth:job_seeker']], function () {
+    Route::group(['middleware' => ['job-seeker-auth']], function () {
         Route::get('profile', [\App\Http\Controllers\JobSeeker\ProfileController::class, 'index']);
 
         Route::get('profile/professional-info', [ProfessionalInfoController::class, 'index']);
@@ -89,6 +89,7 @@ Route::prefix('job-seeker')->group(function () {
 
         Route::get('profile/upload-resume', [UploadResumeController::class, 'index']);
         Route::post('profile/upload-resume', [UploadResumeController::class, 'store']);
+        Route::get('profile/generate-resume', [UploadResumeController::class, 'generateResume']);
     });
 });
 

@@ -53,4 +53,12 @@ class UploadResumeController
         }
     }
 
+    public function generateResume(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    {
+        $jobSeeker = JobSeeker::query()->with(['experiences', 'educations', 'skills.skill'])
+            ->where('id', Auth::guard('job_seeker')->id())
+            ->first();
+
+        return view('frontend.resume-builder.index', compact('jobSeeker'));
+    }
 }

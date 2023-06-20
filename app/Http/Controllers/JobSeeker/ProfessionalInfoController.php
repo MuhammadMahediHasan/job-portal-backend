@@ -17,9 +17,11 @@ class ProfessionalInfoController
 
     public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        $experiences = JobSeekerExperience::query()->with([
-            'company'
-        ])->get();
+        $experiences = JobSeekerExperience::query()
+            ->where('job_seekers_id', Auth::guard('job_seeker')->id())
+            ->with([
+                'company'
+            ])->get();
         $companies = Company::query()->select('id', 'name')->get();
 
         return view('frontend.profile.job-seeker.professional-info',
@@ -44,12 +46,13 @@ class ProfessionalInfoController
                 'id' => $request->get('id')
             ]);
             $requestedData = $request->all();
-            $requestedData['job_seekers_id'] = Auth::id();
+            $requestedData['job_seekers_id'] = Auth::guard('job_seeker')->id();
             $model->fill($requestedData)->save();
 
             Toastr::success('Success', "Saved Successful");
             return back();
         } catch (\Exception $exception) {
+            dd($exception);
             Toastr::error('Error', 'Something went wrong!');
             return back();
         }

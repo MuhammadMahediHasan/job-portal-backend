@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -45,5 +46,20 @@ class JobSeeker extends Authenticatable
                         $query->latest();
                     });
             });
+    }
+
+    public function experiences(): HasMany
+    {
+        return $this->hasMany(JobSeekerExperience::class, 'job_seekers_id');
+    }
+
+    public function educations(): HasMany
+    {
+        return $this->hasMany(JobSeekerEducation::class, 'job_seekers_id');
+    }
+
+    public function skills(): HasMany
+    {
+        return $this->hasMany(JobSeekerSkill::class, 'job_seekers_id');
     }
 }

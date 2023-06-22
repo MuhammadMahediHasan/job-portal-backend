@@ -18,9 +18,11 @@ class SkillController
 
     public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        $skillsInfo = JobSeekerSkill::query()->with([
-            'skill'
-        ])->get();
+        $skillsInfo = JobSeekerSkill::query()
+            ->where('job_seekers_id', Auth::guard('job_seeker')->id())
+            ->with([
+                'skill'
+            ])->get();
         $skills = Skill::query()->select('id', 'name')->get();
 
         return view('frontend.profile.job-seeker.skill',
@@ -41,7 +43,7 @@ class SkillController
                 'id' => $request->get('id')
             ]);
             $requestedData = $request->all();
-            $requestedData['job_seekers_id'] = Auth::id();
+            $requestedData['job_seekers_id'] = Auth::guard('job_seeker')->id();
             $model->fill($requestedData)->save();
 
             Toastr::success('Success', "Saved Successful");

@@ -39,7 +39,7 @@ class EducationalInfoController
                 'id' => $request->get('id')
             ]);
             $requestedData = $request->all();
-            $requestedData['job_seekers_id'] = Auth::id();
+            $requestedData['job_seekers_id'] = Auth::guard('job_seeker')->id();
             $model->fill($requestedData)->save();
 
             Toastr::success('Success', "Saved Successful");

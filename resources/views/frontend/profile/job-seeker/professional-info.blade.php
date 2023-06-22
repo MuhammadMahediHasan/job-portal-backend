@@ -32,7 +32,7 @@
                                     | {{ $experience->address }}
                                 </b>
                             </small>
-                            <p>{{ $experience->description }}</p>
+                            <p>{!! $experience->description  !!}</p>
                         </div>
                         <div class="col-lg-2">
                             <i class="fa fa-edit experience-modal-btn"
@@ -111,7 +111,7 @@
                                         <div class="col-lg-12 mt-2">
                                             <div class="form-group text-left">
                                                 <label for="description">Summary</label>
-                                                <textarea rows="2" class="form-control" id="description"
+                                                <textarea rows="2" class="form-control ckeditor" id="description"
                                                           name="description"> </textarea>
                                                 <small class="text-danger">{{ $errors->first('description') }}</small>
                                             </div>
@@ -130,40 +130,65 @@
 
             </div>
         </div>
-        @endsection
-        @section('scripts')
-            <script>
-                let id = $('#id');
-                let companies_id = $('#companies_id');
-                let designation = $('#designation');
-                let from_date = $('#from_date');
-                let to_date = $('#to_date');
-                let address = $('#address');
-                let description = $('#description');
+    </div>
+@endsection
+@section('scripts')
+{{--    <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>--}}
+{{--<script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>--}}
+<script src="{{ asset('js/tinymce.min.js') }}" referrerpolicy="origin"></script>
 
-                function experienceInfo(data = null) {
-                    id.val(data.id);
-                    companies_id.val(data.companies_id);
-                    designation.val(data.designation);
-                    from_date.val(data.from_date);
-                    to_date.val(data.to_date);
-                    address.val(data.address);
-                    description.val(data.description);
-                }
+    <script>
+        let ckEditorInstance;
+        // $(document).ready(function () {
+        //     ckEditorInstance = CKEDITOR.instances['description'];
+        //     // $('#description').ckeditor();
+        // });
 
-                function resetForm() {
-                    id.val('');
-                    companies_id.val('');
-                    designation.val('');
-                    from_date.val('');
-                    to_date.val('');
-                    address.val('');
-                    description.val('');
-                }
+        tinymce.init({
+            selector: '#description',
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste code help wordcount lists'
+            ],
+            toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help'
+        });
+
+        let id = $('#id');
+        let companies_id = $('#companies_id');
+        let designation = $('#designation');
+        let from_date = $('#from_date');
+        let to_date = $('#to_date');
+        let address = $('#address');
+        let description = $('#description');
+
+        function experienceInfo(data = null) {
+            id.val(data.id);
+            companies_id.val(data.companies_id);
+            designation.val(data.designation);
+            from_date.val(data.from_date);
+            to_date.val(data.to_date);
+            address.val(data.address);
+            description.val(data.description);
+            // ckEditorInstance.setValue(data.description)
+            // $('.ckeditor').ckeditor(data.description);
+            tinymce.get('description').setContent(data.description);
+
+        }
+
+        function resetForm() {
+            id.val('');
+            companies_id.val('');
+            designation.val('');
+            from_date.val('');
+            to_date.val('');
+            address.val('');
+            tinymce.get('description').setContent('');
+        }
 
 
-                function handleDelete(url) {
-                    window.location.replace(url);
-                }
-            </script>
+        function handleDelete(url) {
+            window.location.replace(url);
+        }
+    </script>
 @endsection

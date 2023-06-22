@@ -7,7 +7,7 @@
         <div class="container">
             <div class="row gy-5 gx-4">
                 <div class="col-lg-12" style="padding: 10px; margin: 10px">
-                    <button class="btn btn-sm btn-info float-end" onclick="PrintElem('resume-element')">
+                    <button class="btn btn-sm btn-default float-end pl-2" onclick="PrintElem('resume-element')">
                         <i class="fa fa-print"></i>
                         Print
                     </button>
@@ -17,27 +17,44 @@
                         <div class="sheet" id="resume-element">
                             <div class="two-column resume">
                                 <section class="resume__section resume__header">
-                                    <div class="resume__content">
-                                        <h1>{{ $jobSeeker->name }}</h1>
-                                        <div class="info-item">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="resume__content">
+                                                <h1>{{ $jobSeeker->name }}</h1>
+                                                <div class="info-item">
                                             <span class="info-label">
                                                 <i class="fa fa-location-arrow"></i>
                                             </span>
-                                            <span class="info-text">
+                                                    <span class="info-text">
                                                 {{ $jobSeeker->address }}
                                             </span>
-                                        </div>
-                                        <div class="info-item">
+                                                </div>
+                                                <div class="info-item">
                                             <span class="info-label">
                                                 <i class="fa fa-envelope"></i>
                                             </span>
-                                            <span class="info-text">{{ $jobSeeker->email }}</span>
-                                        </div>
-                                        <div class="info-item">
+                                                    <span class="info-text">{{ $jobSeeker->email }}</span>
+                                                </div>
+                                                <div class="info-item">
                                             <span class="info-label">
                                                 <i class="fa fa-phone"></i>
                                             </span>
-                                            <span class="info-text">{{ $jobSeeker->phone }}</span>
+                                                    <span class="info-text">{{ $jobSeeker->phone }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="resume__image">
+                                                @php
+                                                    $profileImage = 'job-seeker-profile-images/' .  jobSeekerAuthUser()->id . '.jpg';
+                                                    if (!file_exists($profileImage)) {
+                                                        $profileImage = 'https://bootdey.com/img/Content/avatar/avatar7.png';
+                                                    }
+                                                @endphp
+                                                <img src="{{ asset($profileImage) }}"
+                                                     class="w-40 float-end"
+                                                     alt="profile-image"/>
+                                            </div>
                                         </div>
                                     </div>
                                 </section>
@@ -68,8 +85,8 @@
                                                             <small> {{ $experience->address }} </small>
                                                         </div>
                                                         <div class="xp-date">
-                                                            {{ dateFormat($experience->start_date) }}
-                                                            – {{ $experience->end_date ? dateFormat($experience->end_date) : 'Present' }}
+                                                            {{ dateFormat($experience->start_date, 'F, Y') }}
+                                                            – {{ $experience->to_date ? dateFormat($experience->to_date, 'F, Y') : 'Present' }}
                                                         </div>
                                                         <div class="xp-detail">
                                                             {!! $experience->description !!}
@@ -87,40 +104,38 @@
                                                 </div>
                                                 <div class="resume__text">
                                                     @foreach($jobSeeker->skills as $skill)
-                                                    <div class="extra">
-                                                        <div class="extra-info">{{ $skill->skill->name }}<br/>
-                                                            <small>{{ $skill->description }}</small></div>
-{{--                                                        <div class="extra-details">--}}
-{{--                                                            <div class="extra-details__progress"--}}
-{{--                                                                 style="width:90%"></div>--}}
-{{--                                                        </div>--}}
-                                                    </div>
+                                                        <div class="extra">
+                                                            <div class="extra-info">
+                                                                <b>{{ $skill->skill->name }}</b><br/>
+                                                                <span>{{ $skill->description }}</span>
+                                                            </div>
+                                                            {{--                                                        <div class="extra-details">--}}
+                                                            {{--                                                            <div class="extra-details__progress"--}}
+                                                            {{--                                                                 style="width:90%"></div>--}}
+                                                            {{--                                                        </div>--}}
+                                                        </div>
                                                     @endforeach
                                                 </div>
                                             </div>
                                         </section>
                                         <section class="resume__section resume__languages">
                                             <div class="resume__content">
-                                                <div class="resume__section-title"><i class="fa fa-globe"></i>
-                                                    <h2>Languages</h2>
+                                                <div class="resume__section-title">
+                                                    <i class="fa fa-book-open"></i>
+                                                    <h2>Education</h2>
                                                 </div>
                                                 @foreach($jobSeeker->educations as $education)
-                                                <div class="extra">
-                                                    <div class="extra-info">{{ $education->name }}</div>
-                                                </div>
+                                                    <div class="extra">
+                                                        <div class="extra-info">
+                                                            <b>{{ $education->institute }}</b><br/>
+                                                            <span>{{ $education->degree }}</span>
+                                                            <div class="xp-date">
+                                                                {{ dateFormat($education->start_date, 'F, Y') }}
+                                                                – {{ $education->to_date ? dateFormat($education->to_date, 'F, Y') : 'Present' }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 @endforeach
-                                                <div class="extra">
-                                                    <div class="extra-info">English</div>
-                                                    <div class="extra-details">
-                                                        <div class="extra-details__progress" style="width:65%"></div>
-                                                    </div>
-                                                </div>
-                                                <div class="extra">
-                                                    <div class="extra-info">Spanish</div>
-                                                    <div class="extra-details">
-                                                        <div class="extra-details__progress" style="width:20%"></div>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </section>
                                     </div>

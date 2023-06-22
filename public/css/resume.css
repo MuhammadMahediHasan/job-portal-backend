@@ -133,19 +133,33 @@
     padding-top: 0;
 }
 
+/*.resume__content {*/
+/*    float: left;*/
+/*    width: 70%;*/
+/*}*/
+
+/*.resume__image {*/
+/*    margin-left: auto;*/
+/*    width: 30%;*/
+/*}*/
+
 .resume .resume__main {
     float: left;
-    width: 75%;
+    width: 70%;
     padding-right: 6em;
 }
 
 .resume .resume__side {
     float: left;
-    width: 25%;
+    width: 30%;
 }
 
 .resume .other-info p > b {
     color: #555;
+}
+
+.resume .other-info {
+    text-align: justify;
 }
 
 .resume .info-item {

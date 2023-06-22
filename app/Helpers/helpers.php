@@ -82,8 +82,11 @@ if (!file_exists('authUser')) {
 }
 
 if (!file_exists('dateFormat')) {
-    function dateFormat($date): string
+    function dateFormat($date, $format = null): string
     {
+        if ($format) {
+            return date($format, strtotime($date));
+        }
         return date("j F, Y", strtotime($date));
     }
 }

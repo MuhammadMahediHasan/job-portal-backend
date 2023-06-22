@@ -757,6 +757,12 @@ p {
 .cursor-pointer {
     cursor: pointer;
 }
+.w-30 {
+    width: 30% !important;
+}
+.w-40 {
+    width: 40% !important;
+}
 /*.form-floating .select2-container--default .select2-selection--single .select2-selection__arrow {*/
 /*    top: 29px !important;*/
 /*}*/

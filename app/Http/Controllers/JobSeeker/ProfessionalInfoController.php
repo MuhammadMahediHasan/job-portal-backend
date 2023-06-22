@@ -21,7 +21,9 @@ class ProfessionalInfoController
             ->where('job_seekers_id', Auth::guard('job_seeker')->id())
             ->with([
                 'company'
-            ])->get();
+            ])
+            ->get();
+
         $companies = Company::query()->select('id', 'name')->get();
 
         return view('frontend.profile.job-seeker.professional-info',

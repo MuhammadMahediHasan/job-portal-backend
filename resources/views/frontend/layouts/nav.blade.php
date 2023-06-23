@@ -10,29 +10,20 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
             <a href="/" class="nav-item nav-link active"> Home </a>
-            <a href="/about" class="nav-item nav-link"> About </a>
+            <a href="/jobs" class="nav-item nav-link"> Jobs </a>
+            <a href="/job-category" class="nav-item nav-link"> Category </a> </a>
+            <a href="/about-us" class="nav-item nav-link"> About </a>
+            <a href="/contact-us" class="nav-item nav-link"> Contact </a>
 
-            <div class="nav-item dropdown">
-                <a href="/jobs" class="nav-link dropdown-toggle"
-                   data-bs-toggle="dropdown"> Jobs </a>
+{{--            <div class="nav-item dropdown">--}}
+{{--                <a href="/jobs" class="nav-link dropdown-toggle"--}}
+{{--                   data-bs-toggle="dropdown"> Jobs </a>--}}
 
-                <div class="dropdown-menu rounded-0 m-0">
-                    <a href="/job-list" class="dropdown-item"> Job List </a>
-                    <a href="/job-details" class="dropdown-item"> Job Detail </a>
-                </div>
-            </div>
-            <div class="nav-item dropdown">
-                <a href="/jobs" class="nav-link dropdown-toggle"
-                   data-bs-toggle="dropdown"> Pages </a>
-
-                <div class="dropdown-menu rounded-0 m-0">
-                    <a href="/job-category" class="dropdown-item"> Job Category </a>
-                    <a href="/testimonial" class="dropdown-item"> Testimonial </a>
-                    <a href="/profile" class="dropdown-item"> Profile </a>
-                    <a href="/404" class="dropdown-item"> 404 </a>
-                </div>
-            </div>
-            <a href="/contact" class="nav-item nav-link"> Contact </a>
+{{--                <div class="dropdown-menu rounded-0 m-0">--}}
+{{--                    <a href="/job-list" class="dropdown-item"> Job List </a>--}}
+{{--                    <a href="/job-details" class="dropdown-item"> Job Detail </a>--}}
+{{--                </div>--}}
+{{--            </div>--}}
             @if(companyAuthCheck() || jobSeekerAuthCheck())
                 <div class="nav-item dropdown">
                     <a href="#"

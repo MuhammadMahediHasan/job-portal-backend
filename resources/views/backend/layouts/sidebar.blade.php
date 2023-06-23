@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/admin">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-note"></i>
         </div>
@@ -23,30 +23,42 @@
 
     <li class="nav-item">
         <a class="nav-link" href="/admin/category">
-            <i class="fas fa-fw fa-money-bill"></i>
+            <i class="fas fa-fw fa-money-genderless"></i>
             <span>Category</span>
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="/admin/skill">
-            <i class="fas fa-fw fa-bell"></i>
+            <i class="fas fa-fw fa-genderless"></i>
             <span>Skill</span>
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseuser"
-           aria-expanded="true"
-           aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-user"></i>
-            <span>Users</span>
+        <a class="nav-link" href="/admin/message">
+            <i class="fas fa-fw fa-genderless"></i>
+            <span>Messages</span>
         </a>
-        <div id="collapseuser" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="/admin">Admin</a>
-                <a class="collapse-item" href="/client">Client</a>
-            </div>
-        </div>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/admin/general-setting">
+            <i class="fas fa-fw fa-cogs"></i>
+            <span>General Setting</span>
+        </a>
+    </li>
+    {{--    <li class="nav-item">--}}
+    {{--        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseuser"--}}
+    {{--           aria-expanded="true"--}}
+    {{--           aria-controls="collapseTwo">--}}
+    {{--            <i class="fas fa-fw fa-user"></i>--}}
+    {{--            <span>Users</span>--}}
+    {{--        </a>--}}
+    {{--        <div id="collapseuser" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">--}}
+    {{--            <div class="bg-white py-2 collapse-inner rounded">--}}
+    {{--                <a class="collapse-item" href="/admin">Admin</a>--}}
+    {{--                <a class="collapse-item" href="/client">Client</a>--}}
+    {{--            </div>--}}
+    {{--        </div>--}}
+    {{--    </li>--}}
 
     <!-- Heading -->
     {{--    <div class="sidebar-heading">--}}

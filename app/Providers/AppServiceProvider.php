@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\GeneralSetting;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Passport\Passport;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,5 +30,8 @@ class AppServiceProvider extends ServiceProvider
             'job_seeker' => 'Job Seeker Type',
             'company' => 'Company User Type',
         ]);
+
+        $generalSetting = GeneralSetting::query()->first();
+        View::share('generalSetting', $generalSetting);
     }
 }

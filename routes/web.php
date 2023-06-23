@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\GeneralSettingController;
 use App\Http\Controllers\ApplyController;
 use App\Http\Controllers\Auth\AdminAuthController;
 use App\Http\Controllers\Auth\CompanyAuthController;
@@ -26,12 +27,36 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/job-category', [HomeController::class, 'category']);
 Route::get('job-details/{slug}', [HomeController::class, 'jobDetails']);
 Route::get('jobs', [\App\Http\Controllers\JobController::class, 'index']);
+Route::post('contact-us', [HomeController::class, 'contactUs']);
 
-Route::get('/job-seeker/register', function () {
-    return view('frontend.auth.job-seeker-register');
+Route::get('/contact-us', function () {
+    return view('frontend.pages.contact-us');
 });
+Route::get('/about-us', function () {
+    return view('frontend.pages.about-us');
+});
+Route::get('/our-services', function () {
+    return view('frontend.pages.our-services');
+});
+Route::get('/privacy-policy', function () {
+    return view('frontend.pages.privacy-policy');
+});
+Route::get('/terms-and-condition', function () {
+    return view('frontend.pages.terms-and-condition');
+});
+Route::get('/help', function () {
+    return view('frontend.pages.help');
+});
+Route::get('/fqas', function () {
+    return view('frontend.pages.fqas');
+});
+
+//Route::get('/job-seeker/register', function () {
+//    return view('frontend.auth.job-seeker-register');
+//});
 
 
 Route::prefix('admin')->group(function () {
@@ -41,7 +66,9 @@ Route::prefix('admin')->group(function () {
     Route::group(['middleware' => ['admin-auth']], function () {
         Route::get('/', [\App\Http\Controllers\Admin\HomeController::class, 'index']);
         Route::resource('category', CategoryController::class);
+        Route::resource('general-setting', GeneralSettingController::class);
         Route::resource('skill', \App\Http\Controllers\Admin\SkillController::class);
+        Route::get('message', [\App\Http\Controllers\Admin\HomeController::class, 'messages']);
     });
 });
 

@@ -35,6 +35,10 @@
                                class="mb-1 btn btn-block btn-outline-secondary">
                                 Your Job List
                             </a>
+                            <a href="/company/profile/change-password"
+                               class="btn btn-block btn-outline-secondary">
+                                Change Password
+                            </a>
                         </div>
                     </div>
                 </div>

@@ -23,7 +23,7 @@
 
     <li class="nav-item">
         <a class="nav-link" href="/admin/category">
-            <i class="fas fa-fw fa-money-genderless"></i>
+            <i class="fas fa-fw fa-genderless"></i>
             <span>Category</span>
         </a>
     </li>

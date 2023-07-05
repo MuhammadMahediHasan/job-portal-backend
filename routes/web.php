@@ -79,11 +79,13 @@ Route::prefix('company')->group(function () {
     Route::post('login', [CompanyAuthController::class, 'login']);
     Route::get('logout', [CompanyAuthController::class, 'logout']);
 
-    Route::group(['middleware' => ['company-auth']], function () {
-        Route::get('profile', [ProfileController::class, 'index']);
-        Route::get('profile/edit', [ProfileController::class, 'edit']);
-        Route::resource('profile/jobs', JobController::class);
-        Route::get('profile/jobs/{id}/apply', [JobController::class, 'apply']);
+    Route::group(['middleware' => ['company-auth'], 'prefix' => 'profile'], function () {
+        Route::get('', [ProfileController::class, 'index']);
+        Route::get('/edit', [ProfileController::class, 'edit']);
+        Route::resource('/jobs', JobController::class);
+        Route::get('/jobs/{id}/apply', [JobController::class, 'apply']);
+        Route::get('/change-password', [ProfileController::class, 'changePassword']);
+        Route::post('/change-password', [ProfileController::class, 'postChangePassword']);
 
         Route::get('/user', function () {
             return \Illuminate\Support\Facades\Auth::user();
@@ -99,24 +101,26 @@ Route::prefix('job-seeker')->group(function () {
     Route::get('logout', [JobSeekerAuthController::class, 'logout']);
     Route::post('apply', [ApplyController::class, 'store']);
 
-    Route::group(['middleware' => ['job-seeker-auth']], function () {
-        Route::get('profile', [\App\Http\Controllers\JobSeeker\ProfileController::class, 'index']);
+    Route::group(['middleware' => ['job-seeker-auth'], 'prefix' => 'profile'], function () {
+        Route::get('', [\App\Http\Controllers\JobSeeker\ProfileController::class, 'index']);
 
-        Route::get('profile/professional-info', [ProfessionalInfoController::class, 'index']);
-        Route::post('profile/professional-info', [ProfessionalInfoController::class, 'store']);
-        Route::get('profile/professional-info/{id}/delete', [ProfessionalInfoController::class, 'delete']);
+        Route::get('/professional-info', [ProfessionalInfoController::class, 'index']);
+        Route::post('/professional-info', [ProfessionalInfoController::class, 'store']);
+        Route::get('/professional-info/{id}/delete', [ProfessionalInfoController::class, 'delete']);
 
-        Route::get('profile/educational-info', [EducationalInfoController::class, 'index']);
-        Route::post('profile/educational-info', [EducationalInfoController::class, 'store']);
-        Route::get('profile/educational-info/{id}/delete', [EducationalInfoController::class, 'delete']);
+        Route::get('/educational-info', [EducationalInfoController::class, 'index']);
+        Route::post('/educational-info', [EducationalInfoController::class, 'store']);
+        Route::get('/educational-info/{id}/delete', [EducationalInfoController::class, 'delete']);
 
-        Route::get('profile/skill', [SkillController::class, 'index']);
-        Route::post('profile/skill', [SkillController::class, 'store']);
-        Route::get('profile/skill/{id}/delete', [SkillController::class, 'delete']);
+        Route::get('/skill', [SkillController::class, 'index']);
+        Route::post('/skill', [SkillController::class, 'store']);
+        Route::get('/skill/{id}/delete', [SkillController::class, 'delete']);
 
-        Route::get('profile/upload-resume', [UploadResumeController::class, 'index']);
-        Route::post('profile/upload-resume', [UploadResumeController::class, 'store']);
-        Route::get('profile/generate-resume', [UploadResumeController::class, 'generateResume']);
+        Route::get('/upload-resume', [UploadResumeController::class, 'index']);
+        Route::post('/upload-resume', [UploadResumeController::class, 'store']);
+        Route::get('/generate-resume', [UploadResumeController::class, 'generateResume']);
+        Route::get('/change-password', [\App\Http\Controllers\JobSeeker\ProfileController::class, 'changePassword']);
+        Route::post('/change-password', [\App\Http\Controllers\JobSeeker\ProfileController::class, 'postChangePassword']);
     });
 });
 

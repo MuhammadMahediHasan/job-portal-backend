@@ -54,7 +54,6 @@ class ProfessionalInfoController
             Toastr::success('Success', "Saved Successful");
             return back();
         } catch (\Exception $exception) {
-            dd($exception);
             Toastr::error('Error', 'Something went wrong!');
             return back();
         }

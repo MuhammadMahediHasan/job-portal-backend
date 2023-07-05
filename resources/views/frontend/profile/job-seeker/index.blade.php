@@ -51,8 +51,12 @@
                                 Upload Resume
                             </a>
                             <a href="/job-seeker/profile/generate-resume"
-                               class="btn btn-block btn-outline-secondary">
+                               class="mb-1 btn btn-block btn-outline-secondary">
                                 Resume Generate
+                            </a>
+                            <a href="/job-seeker/profile/change-password"
+                               class="btn btn-block btn-outline-secondary">
+                                Change Password
                             </a>
                         </div>
                     </div>

@@ -12,9 +12,10 @@ class JobMailAction
 {
     public static function send($job, $skills)
     {
+        $url = url("/job-details/{$job->slug}");
         $mailData = [
-            'subject' => 'Mail from eJobs',
-            'body' => 'This is for testing email using smtp.'
+            'subject' => 'eJobs Job alert.',
+            'body' => "Your job alert for {$job->title}. Click here to show job details $url"
         ];
 
         $jobSeeker = JobSeekerSkill::query()

@@ -66,7 +66,7 @@ class JobController extends Controller
             $model->save();
 
             JobSkillAction::attach($request->get('skill_id'), $model);
-            //JobMailAction::send($model, $request->get('skill_id'));
+            JobMailAction::send($model, $request->get('skill_id'));
 
             DB::commit();
 

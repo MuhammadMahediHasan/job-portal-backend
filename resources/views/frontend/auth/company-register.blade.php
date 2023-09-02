@@ -39,6 +39,7 @@
                                 <div class="col-12">
                                     <div class="form-floating">
                                         <select class="form-control"
+                                                name="type"
                                                 id="company-name"
                                                 placeholder="Company Type">
                                             <option>Select</option>

@@ -35,10 +35,10 @@ class UploadResumeController
                 $type = $request->file('resume')->getClientOriginalExtension();
                 $originalName = $request->file('resume')->getClientOriginalName();
                 $path = "resume/";
-                $name = Auth::id() . "." . $type;
+                $name = Auth::guard('job_seeker')->id() . "." . $type;
                 $request->file('resume')->move($path, $name);
 
-                $jobSeeker = JobSeeker::query()->find(Auth::id());
+                $jobSeeker = JobSeeker::query()->find(Auth::guard('job_seeker')->id());
                 $jobSeeker->update([
                     'resume' => $originalName
                 ]);

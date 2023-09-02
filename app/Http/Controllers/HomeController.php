@@ -21,18 +21,18 @@ class HomeController
             ->get();
 
         $jobs = Job::query()
-            ->join('companies', 'companies.id', 'jobs.companies_id')
+            ->join('companies', 'companies.id', 'job_posts.companies_id')
             ->select(
-                'jobs.title as title',
-                'jobs.location',
-                'jobs.slug',
+                'job_posts.title as title',
+                'job_posts.location',
+                'job_posts.slug',
                 'type',
                 'salary_range',
                 'dead_line',
                 'companies.id as company_id'
             )
             ->limit(20)
-            ->orderByDesc('jobs.created_at')
+            ->orderByDesc('job_posts.created_at')
             ->get();
 
         return view('frontend.pages.home', compact('categories', 'jobs'));
@@ -51,16 +51,16 @@ class HomeController
     {
         $job = Job::query()
             ->with('jobSeekerApply')
-            ->join('companies', 'companies.id', 'jobs.companies_id')
+            ->join('companies', 'companies.id', 'job_posts.companies_id')
             ->select(
-                'jobs.title as title',
-                'jobs.id',
-                'jobs.location',
-                'jobs.created_at',
-                'jobs.slug',
-                'jobs.job_nature',
+                'job_posts.title as title',
+                'job_posts.id',
+                'job_posts.location',
+                'job_posts.created_at',
+                'job_posts.slug',
+                'job_posts.job_nature',
                 'type',
-                'jobs.description',
+                'job_posts.description',
                 'salary_range',
                 'dead_line',
                 'companies.id as company_id',

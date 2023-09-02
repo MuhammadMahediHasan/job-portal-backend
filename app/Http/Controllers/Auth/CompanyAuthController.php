@@ -45,6 +45,7 @@ class CompanyAuthController
             Toastr::success('Success', "Login Successful");
             return redirect('/');
         } catch (\Exception $exception) {
+            dd($exception);
             Toastr::error('Error', 'Something went wrong!');
             return back();
         }

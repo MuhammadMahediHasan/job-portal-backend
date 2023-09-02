@@ -24,7 +24,7 @@ class JobController
         $skillId = $request->get('skill_id');
         $jobs = Job::query()
             ->with(['jobCategory', 'skills'])
-            ->join('companies', 'companies.id', 'jobs.companies_id')
+            ->join('companies', 'companies.id', 'job_posts.companies_id')
             ->when($search, function ($query) use ($search) {
                 $query->where('title', 'LIKE', "%{$search}%")
                     ->orWhere('location', 'LIKE', "%{$search}%")
@@ -45,13 +45,13 @@ class JobController
                 $query->where('job_nature', $type);
             })
             ->select(
-                'jobs.title as title',
-                'jobs.id',
-                'jobs.location',
-                'jobs.created_at',
-                'jobs.slug',
+                'job_posts.title as title',
+                'job_posts.id',
+                'job_posts.location',
+                'job_posts.created_at',
+                'job_posts.slug',
                 'type',
-                'jobs.description',
+                'job_posts.description',
                 'salary_range',
                 'dead_line',
                 'companies.id as company_id',

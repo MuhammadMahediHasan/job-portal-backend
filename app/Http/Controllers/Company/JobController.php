@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Company;
 
+use App\Actions\JobMailAction;
 use App\Actions\JobSkillAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\JobRequest;
@@ -30,7 +31,7 @@ class JobController extends Controller
             $jobs = Job::query()
                 ->with('jobCategory')
                 ->orderByDesc('id')
-                ->where('companies_id', Auth::id())
+                ->where('companies_id', Auth::guard('company')->id())
                 ->get();
 
             return view('frontend.profile.company.job-list', compact('jobs'));
@@ -65,12 +66,14 @@ class JobController extends Controller
             $model->save();
 
             JobSkillAction::attach($request->get('skill_id'), $model);
+            //JobMailAction::send($model, $request->get('skill_id'));
 
             DB::commit();
 
             Toastr::success('Success', "Job Successful");
             return back();
         } catch (\Exception $exception) {
+            dd($exception);
             Toastr::error('Error', 'Something went wrong!');
             return back();
         }
@@ -91,6 +94,7 @@ class JobController extends Controller
     }
 
     /**
+     * @param $id
      * @return \Illuminate\Contracts\Foundation\Application|Factory|View|Application|RedirectResponse
      */
     public function edit($id): Application|View|Factory|RedirectResponse|\Illuminate\Contracts\Foundation\Application

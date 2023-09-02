@@ -11,7 +11,9 @@
                 <span class="text-truncate me-3"><i
                         class="fa fa-map-marker-alt text-primary me-2"></i>{{ $job->location }}</span>
                 <span class="text-truncate me-3"><i
-                        class="far fa-clock text-primary me-2"></i>{{ $job->type }}</span>
+                        class="far fa-clock text-primary me-2"></i>
+                        {{ \App\Models\Job::TYPES[$job->type] ?? ''  }}
+                </span>
                 <span class="text-truncate me-0"><i
                         class="far fa-money-bill-alt text-primary me-2"></i>{{ $job->salary_range }}</span>
             </div>

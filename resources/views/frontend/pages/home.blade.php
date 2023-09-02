@@ -5,8 +5,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h1>Employer?</h1>
-                        <h2>Find Your Next <span>Talent</span></h2>
+                        <h1>Looking for a job?</h1>
+                        <h2>Find Your <span>Job</span> here</h2>
                         <form class="banner-form" action="/jobs">
                             <div class="row sm-gutters">
                                 <div class="col-sm-7" style="transition: 0.5s">

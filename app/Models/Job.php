@@ -13,6 +13,7 @@ class Job extends Model
 {
     use HasFactory;
 
+    protected $table = 'job_posts';
     protected $fillable = [
         'job_categories_id',
         'companies_id',

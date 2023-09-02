@@ -72,7 +72,7 @@
                                         </div>
                                         <div class="col-lg-12 mt-2">
                                             <div class="form-group text-left">
-                                                <label for="description">Designation</label>
+                                                <label for="description">Description</label>
                                                 <input type="text" class="form-control" id="description"
                                                        name="description"/>
                                                 <small class="text-danger">{{ $errors->first('description') }}</small>

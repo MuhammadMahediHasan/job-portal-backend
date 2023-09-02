@@ -18,78 +18,43 @@
             <div class="col-lg-3 mb-4">
                 <div class="card bg-primary text-white shadow">
                     <div class="card-body">
-                        Today Application Received
+                        Today Employer
                         <div
-                            class="text-white small">10</div>
+                            class="text-white small">
+                            {{ \Illuminate\Support\Facades\DB::table('companies')->count() }}
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 mb-4">
                 <div class="card bg-success text-white shadow">
                     <div class="card-body">
-                        This Month Application Received
+                        Total Job Seeker
                         <div
-                            class="text-white small">0</div>
+                            class="text-white small">
+                            {{ \Illuminate\Support\Facades\DB::table('job_seekers')->count() }}
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 mb-4">
                 <div class="card bg-info text-white shadow">
                     <div class="card-body">
-                        Last Month Application Received
+                        Total Jobs
                         <div
-                            class="text-white small">0</div>
+                            class="text-white small">
+                            {{ \Illuminate\Support\Facades\DB::table('job_posts')->count() }}
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 mb-4">
                 <div class="card bg-warning text-white shadow">
                     <div class="card-body">
-                        Total Application Received
-                        <div class="text-white small">0</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 mb-4">
-                <div class="card bg-danger text-white shadow">
-                    <div class="card-body">
-                        Today Delivered
-                        <div
-                            class="text-white small">0</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 mb-4">
-                <div class="card bg-secondary text-white shadow">
-                    <div class="card-body">
-                        This Month Delivered
-                        <div
-                            class="text-white small">0</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 mb-4">
-                <div class="card bg-light text-black shadow">
-                    <div class="card-body">
-                        Last Month Delivered
-                        <div
-                            class="text-black small">0</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 mb-4">
-                <div class="card bg-dark text-white shadow">
-                    <div class="card-body">
-                        Total Delivered
-                        <div class="text-white small">0</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 mb-4">
-                <div class="card bg-dark text-white shadow">
-                    <div class="card-body">
-                        SMS Balance
-                        <div class="text-white small">0</div>
+                        Total Category
+                        <div class="text-white small">
+                            {{ \Illuminate\Support\Facades\DB::table('job_categories')->count() }}
+                        </div>
                     </div>
                 </div>
             </div>

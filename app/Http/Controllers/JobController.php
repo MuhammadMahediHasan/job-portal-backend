@@ -44,6 +44,7 @@ class JobController
             ->when($type, function ($query) use ($type) {
                 $query->where('job_nature', $type);
             })
+            ->where('job_posts.status', 1)
             ->select(
                 'job_posts.title as title',
                 'job_posts.id',

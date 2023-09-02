@@ -35,9 +35,13 @@
                     <div class="col-12">
                         <div class="form-floating">
                             <select class="form-control"
+                                    name="type"
                                     id="company-name"
                                     placeholder="Company Type">
                                 <option>Select</option>
+                                @foreach($jobTypes as $key => $value)
+                                    <option @selected($key === $profile->type) value="{{ $key }}">{{ $value }}</option>
+                                @endforeach
                             </select>
                             <label for="company-name">Company Type</label>
                         </div>

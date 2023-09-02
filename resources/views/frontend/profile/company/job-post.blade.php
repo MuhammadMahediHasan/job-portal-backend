@@ -129,6 +129,7 @@
 
                 <div class="row mt-2">
                     <div class="col-12">
+                        <label for="skill_id">Skills</label>
                         <select class="form-control select2-input"
                                 id="skill_id"
                                 name="skill_id[]"

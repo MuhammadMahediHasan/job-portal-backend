@@ -40,6 +40,24 @@
         </a>
     </li>
     <li class="nav-item">
+        <a class="nav-link" href="/admin/jobs">
+            <i class="fas fa-fw fa-genderless"></i>
+            <span>Jobs</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/admin/employer">
+            <i class="fas fa-fw fa-genderless"></i>
+            <span>Employer</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/admin/job-seeker">
+            <i class="fas fa-fw fa-genderless"></i>
+            <span>Job Seeker</span>
+        </a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link" href="/admin/general-setting">
             <i class="fas fa-fw fa-cogs"></i>
             <span>General Setting</span>

@@ -69,6 +69,10 @@ Route::prefix('admin')->group(function () {
         Route::resource('general-setting', GeneralSettingController::class);
         Route::resource('skill', \App\Http\Controllers\Admin\SkillController::class);
         Route::get('message', [\App\Http\Controllers\Admin\HomeController::class, 'messages']);
+        Route::get('employer', [\App\Http\Controllers\Admin\HomeController::class, 'employer']);
+        Route::get('jobs', [\App\Http\Controllers\Admin\HomeController::class, 'jobs']);
+        Route::get('jobs/{job}/status', [\App\Http\Controllers\Admin\HomeController::class, 'jobStatus']);
+        Route::get('job-seeker', [\App\Http\Controllers\Admin\HomeController::class, 'jobSeekers']);
     });
 });
 

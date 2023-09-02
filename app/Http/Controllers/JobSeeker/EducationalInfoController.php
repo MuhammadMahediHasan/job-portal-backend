@@ -17,7 +17,9 @@ class EducationalInfoController
 
     public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        $educationalInfos = JobSeekerEducation::query()->get();
+        $educationalInfos = JobSeekerEducation::query()
+            ->where('job_seekers_id', Auth::guard('job_seeker')->id())
+            ->get();
 
         return view('frontend.profile.job-seeker.educational-info',
             compact('educationalInfos')

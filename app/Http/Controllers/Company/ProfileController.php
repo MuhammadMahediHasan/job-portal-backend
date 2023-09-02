@@ -23,8 +23,9 @@ class ProfileController
     public function edit(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         $profile = companyAuthUser();
+        $jobTypes = Company::TYPES;
 
-        return view('frontend.profile.company.information', compact('profile'));
+        return view('frontend.profile.company.information', compact('profile', 'jobTypes'));
     }
 
     public function changePassword(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application

@@ -42,10 +42,16 @@ class CompanyAuthController
 
             }
 
-            Toastr::success('Success', "Login Successful");
+            Toastr::success('Success', "Successful");
+
+            if (url()->previous() == 'http://127.0.0.1:8001/company/profile/edit') {
+                return redirect('/company/profile');
+            }
+            if (url()->previous() == 'http://127.0.0.1:8001/company/register') {
+                return redirect('/company/login');
+            }
             return redirect('/');
         } catch (\Exception $exception) {
-            dd($exception);
             Toastr::error('Error', 'Something went wrong!');
             return back();
         }

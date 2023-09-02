@@ -118,7 +118,7 @@
                         <p><i class="fa fa-angle-right text-primary me-2"></i>Published
                             On: {{ dateFormat($job->created_at) }}</p>
                         <p><i class="fa fa-angle-right text-primary me-2"></i>Vacancy: {{ $job->vacancy }} Position</p>
-                        <p><i class="fa fa-angle-right text-primary me-2"></i>Job Nature: {{ $job->job_nature }}</p>
+                        <p><i class="fa fa-angle-right text-primary me-2"></i>Job Nature: {{ \App\Models\Job::TYPES[$job->type] ?? ''  }}</p>
                         <p><i class="fa fa-angle-right text-primary me-2"></i>Salary: {{ $job->salary_range }}</p>
                         <p><i class="fa fa-angle-right text-primary me-2"></i>Location: {{ $job->location }}</p>
                         <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>Date

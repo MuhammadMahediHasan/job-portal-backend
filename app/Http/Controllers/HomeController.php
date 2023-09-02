@@ -32,6 +32,7 @@ class HomeController
                 'companies.id as company_id'
             )
             ->limit(20)
+            ->where('job_posts.status', 1)
             ->orderByDesc('job_posts.created_at')
             ->get();
 

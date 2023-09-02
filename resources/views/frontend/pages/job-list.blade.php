@@ -72,57 +72,8 @@
     <div class="container mt-5">
         <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Job Listing</h1>
         <div class="row">
-            <div class="col-sm-3">
-                <div class="sidebar">
-                    <div class="sidebar-item">
-                        <h4 class="title">Industry</h4>
-                        <ul>
-                            <li>
-                                <input type="checkbox"/>
-                                IT/Telecommunication <span>40</span>
-                            </li>
-                            <li>
-                                <input type="checkbox"/>
-                                Education <span>24</span>
-                            </li>
-                            <li>
-                                <input type="checkbox"/>
-                                Real State <span>30</span>
-                            </li>
-                            <li>
-                                <input type="checkbox"/>
-                                Garments/Textile <span>15</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="sidebar">
-                    <div class="sidebar-item">
-                        <h4 class="title">Qualification</h4>
-                        <ul>
-                            <li>Masters <span>40</span></li>
-                            <li>Honors <span>24</span></li>
-                            <li>Diploma <span>30</span></li>
-                            <li>HSC/SSC <span>15</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="sidebar">
-                    <div class="sidebar-item">
-                        <h4 class="title">Experience</h4>
-                        <ul>
-                            <li>More Then 5 Years <span>40</span></li>
-                            <li>4 to 5 Years <span>24</span></li>
-                            <li>3 to 4 Years <span>30</span></li>
-                            <li>2 to 3 Years <span>15</span></li>
-                            <li>1 to 2 Years <span>5</span></li>
-                            <li>Less Then 1 Years <span>0</span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-9">
+            <div class="col-sm-1"> </div>
+            <div class="col-sm-10">
                 <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
 
                     @foreach($jobs as $job)

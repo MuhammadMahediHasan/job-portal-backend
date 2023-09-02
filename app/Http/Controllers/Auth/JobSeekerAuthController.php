@@ -12,6 +12,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Toastr;
 
@@ -44,6 +45,12 @@ class JobSeekerAuthController
             }
 
             Toastr::success('Success', "Stored Successful");
+            if (url()->previous() == 'http://127.0.0.1:8001/job-seeker/profile') {
+                return redirect('/job-seeker/profile');
+            }
+            if (url()->previous() == 'http://127.0.0.1:8001/job-seeker/register') {
+                return redirect('/job-seeker/login');
+            }
             return redirect('/');
         } catch (\Exception $exception) {
             Toastr::error('Error', 'Something went wrong!');

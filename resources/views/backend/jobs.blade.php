@@ -32,6 +32,11 @@
                                 <td>{{ date('d-m-Y', strtotime($job->dead_line)) }}</td>
                                 <td>
                                     <div class="d-flex justify-content-center">
+                                        <a href="/job-details/{{ $job->slug }}"
+                                           class="btn btn-sm btn-info text-white"
+                                           target="_blank">
+                                            View
+                                        </a>
                                         <a href="/admin/jobs/{{ $job->id }}/status"
                                            class="btn btn-sm btn-info text-white">
                                             @if($job->status == 1)

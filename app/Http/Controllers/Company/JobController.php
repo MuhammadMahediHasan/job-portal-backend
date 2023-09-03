@@ -73,7 +73,6 @@ class JobController extends Controller
             Toastr::success('Success', "Job Successful");
             return back();
         } catch (\Exception $exception) {
-            dd($exception);
             Toastr::error('Error', 'Something went wrong!');
             return back();
         }
